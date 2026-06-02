@@ -25,7 +25,7 @@ This repo is the engine that does that comparison automatically. It was original
 | 🍽️ Restaurant | Sysco | 1 file | 30 lines · $74.8K spend · **$8.2K savings** |
 | 👓 Optometry | VSP/Essilor | 1 file | 30 lines · $98.8K spend · **$12.3K savings** · 1 catalog gap |
 
-**Live demo (dental example):** https://sourceclub-poc.streamlit.app/
+**Live demo (all 5 verticals):** `https://vertical-procurement-toolkit.streamlit.app` ← deploy instructions below
 
 ## Try it in 30 seconds
 
@@ -114,6 +114,17 @@ flowchart TD
 The **3 stages exist because the failure modes are different.** Stage 1 catches the easy 30–40% (clean SKU matches) at zero LLM cost. Stage 2 narrows the candidate space. Stage 3 is where reasoning happens (UOM normalization, manufacturer disambiguation).
 
 The **UOM / pack-size normalizer** is the actual hard problem. "Box of 100" vs "case of 10 boxes" matters more than fuzzy description scoring — the unit-economics math breaks otherwise. This is its own concern in the architecture and runs cross-cut to the 3 stages.
+
+---
+
+## Deploy your own demo (10 minutes)
+
+1. Fork this repo on GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**
+3. Select your fork → branch `main` → main file path `app/main.py`
+4. Click **Deploy** — that's it. The demo shows all 5 verticals in the dropdown.
+
+No API keys required. Runs fully offline on bundled sample data.
 
 ---
 

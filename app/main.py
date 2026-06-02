@@ -36,14 +36,25 @@ from app_helpers.email_drafter import draft_outreach_email
 
 st.set_page_config(
     page_title="Vertical Procurement Toolkit",
-    page_icon="🦷",
+    page_icon="📦",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
 
 ROOT = Path(__file__).parent.parent
-CATALOG_PATH = ROOT / "sample_data" / "sourceclub_catalog.csv"
 SAMPLE_DIR = ROOT / "sample_data"
+
+# Per-vertical catalog mapping
+VERTICAL_CATALOGS = {
+    "dental":     "sourceclub_catalog.csv",
+    "vet":        "vet_catalog.csv",
+    "hvac":       "hvac_catalog.csv",
+    "restaurant": "restaurant_catalog.csv",
+    "optometry":  "optometry_catalog.csv",
+}
+
+# Default fallback
+CATALOG_PATH = SAMPLE_DIR / "sourceclub_catalog.csv"
 
 # ---------- Theme state ----------
 if "theme" not in st.session_state:
@@ -342,8 +353,9 @@ st.markdown(css, unsafe_allow_html=True)
 
 
 @st.cache_data
-def load_catalog() -> pd.DataFrame:
-    return pd.read_csv(CATALOG_PATH)
+def load_catalog(vertical: str = "dental") -> pd.DataFrame:
+    catalog_file = VERTICAL_CATALOGS.get(vertical, "sourceclub_catalog.csv")
+    return pd.read_csv(SAMPLE_DIR / catalog_file)
 
 
 def status_badge(status: str) -> str:
@@ -382,7 +394,7 @@ st.markdown(f"""
 </div>
 </div>
 </div>
-<div class="sc-tagline">Case-study deliverable for the <b>Head of AI Powered Operations, Systems &amp; RevOps</b> role. Three lean prototypes — savings-analysis automation, Stripe↔HubSpot multi-location sync, 90-day project roadmap — fronted by a <b>leadership dashboard</b> with persona views for the CEO, Head of Marketing, and Head of Sales/Revenue.</div>
+<div class="sc-tagline">Open-source reference architecture for automating supplier-invoice savings analysis across <b>fragmented-supplier industries</b> — dental, vet, HVAC, restaurant, optometry, and beyond. Upload a purchase history, get a savings report. <a href="https://github.com/abhinaykrupa/vertical-procurement-toolkit" style="color:#14B8A6;">GitHub ↗</a></div>
 """, unsafe_allow_html=True)
 
 tab_dash, tab_sa, tab_sync, tab_roadmap = st.tabs([
@@ -443,52 +455,79 @@ Upload → Auto-detect Supplier → Supplier Adapter → Canonical Schema
         uploaded_file = st.file_uploader(
             "Drop a supplier purchase history CSV",
             type=["csv"],
-            help="Supports Benco, Henry Schein, Darby, Base86, and 'Patterson (messy)' export formats."
+            help="Supports dental (Benco, Henry Schein, Darby, Base86, Patterson), vet (Vetcove), HVAC (Ferguson), restaurant (Sysco), and optometry (VSP/Essilor) export formats.",
         )
     with col_right:
         st.markdown("**Or try a sample file:**")
         sample_choice = st.selectbox(
             "Sample file",
-            options=["— none —",
-                     "Auburn Dental (Benco)",
-                     "Demit Dental (Henry Schein)",
-                     "Quincy Smiles (Darby)",
-                     "Auburn Dental Group (Base86)",
-                     "Patterson (messy real-world export)"],
+            options=[
+                "— none —",
+                "── 🦷 Dental ──",
+                "Auburn Dental (Benco)",
+                "Demit Dental (Henry Schein)",
+                "Quincy Smiles (Darby)",
+                "Auburn Dental Group (Base86)",
+                "Patterson (messy real-world export)",
+                "── 🐾 Veterinary ──",
+                "Sample Clinic (Vetcove)",
+                "── 🔧 HVAC ──",
+                "Comfort Pro (Ferguson)",
+                "── 🍽️ Restaurant ──",
+                "Bistro 24 (Sysco)",
+                "── 👓 Optometry ──",
+                "ClearView Optical (VSP/Essilor)",
+            ],
             label_visibility="collapsed",
         )
 
+    # Map display name → (filename, vertical)
     sample_map = {
-        "Auburn Dental (Benco)": "auburn_dental_benco.csv",
-        "Demit Dental (Henry Schein)": "demit_dental_henry_schein.csv",
-        "Quincy Smiles (Darby)": "quincy_smiles_darby.csv",
-        "Auburn Dental Group (Base86)": "auburn_dental_base86.csv",
-        "Patterson (messy real-world export)": "harbor_view_patterson_messy.csv",
+        # Dental
+        "Auburn Dental (Benco)":            ("auburn_dental_benco.csv", "dental"),
+        "Demit Dental (Henry Schein)":      ("demit_dental_henry_schein.csv", "dental"),
+        "Quincy Smiles (Darby)":            ("quincy_smiles_darby.csv", "dental"),
+        "Auburn Dental Group (Base86)":     ("auburn_dental_base86.csv", "dental"),
+        "Patterson (messy real-world export)": ("harbor_view_patterson_messy.csv", "dental"),
+        # Vet
+        "Sample Clinic (Vetcove)":          ("sample_clinic_vetcove.csv", "vet"),
+        # HVAC
+        "Comfort Pro (Ferguson)":           ("comfort_pro_ferguson.csv", "hvac"),
+        # Restaurant
+        "Bistro 24 (Sysco)":                ("bistro_24_sysco.csv", "restaurant"),
+        # Optometry
+        "ClearView Optical (VSP/Essilor)":  ("clearview_optical_vsp.csv", "optometry"),
     }
 
     file_bytes = None
     filename = None
+    selected_vertical = "dental"  # default
 
     if uploaded_file is not None:
         file_bytes = uploaded_file.read()
         filename = uploaded_file.name
-    elif sample_choice != "— none —":
-        sample_path = SAMPLE_DIR / sample_map[sample_choice]
+    elif sample_choice in sample_map:
+        sample_file, selected_vertical = sample_map[sample_choice]
+        sample_path = SAMPLE_DIR / sample_file
         if sample_path.exists():
             file_bytes = sample_path.read_bytes()
             filename = sample_path.name
         else:
             st.warning(f"Sample file {sample_path.name} not found yet.")
+    elif sample_choice.startswith("──"):
+        # Section header selected — treat as no selection
+        pass
 
     if file_bytes is None:
         st.info("👆 Upload a file or select a sample to run the analysis.")
     else:
         # ---- Detect supplier ----
         detected = auto_detect.detect(file_bytes, filename)
-        c1, c2, c3 = st.columns(3)
+        c1, c2, c3, c4 = st.columns(4)
         c1.metric("File", filename)
         c2.metric("Detected Supplier", detected)
-        c3.metric("Pipeline", "3-stage + UOM check")
+        c3.metric("Vertical", selected_vertical.title())
+        c4.metric("Pipeline", "3-stage + UOM")
 
         if detected == "Unknown":
             st.error("Could not auto-detect supplier from this file. Add an adapter to support it.")
@@ -508,7 +547,11 @@ Upload → Auto-detect Supplier → Supplier Adapter → Canonical Schema
             st.dataframe(normalized, use_container_width=True)
 
         # ---- Match ----
-        catalog = load_catalog()
+        # For uploads, infer vertical from adapter; for samples, use pre-set vertical
+        from engine.adapters import ADAPTER_VERTICAL
+        if uploaded_file is not None:
+            selected_vertical = ADAPTER_VERTICAL.get(detected, "dental")
+        catalog = load_catalog(selected_vertical)
         with st.spinner("Running 3-stage matching engine..."):
             results = match_invoice(normalized, catalog)
 
