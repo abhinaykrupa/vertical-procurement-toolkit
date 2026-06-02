@@ -1,0 +1,47 @@
+# Dental UOM vocabulary
+# Used by vpt.uom.load_uom_table("dental")
+# Format:
+#   aliases: { source_token: canonical_token }
+#   stopwords: list of tokens to ignore in description tokenization
+#   pack_size_patterns: ordered regex patterns (capture group 1 = pack size, group 2 = uom)
+
+aliases:
+  bx: box
+  box: box
+  boxes: box
+  cs: case
+  case: case
+  cases: case
+  bg: bag
+  bag: bag
+  bags: bag
+  pk: pack
+  pack: pack
+  packs: pack
+  ea: each
+  each: each
+  rl: roll
+  roll: roll
+  syr: syringe
+  syringe: syringe
+  cart: cartridge
+  cartridge: cartridge
+  cartridges: cartridge
+  carp: cartridge  # dental anesthetic carpules
+  tube: tube
+  tubes: tube
+  bottle: bottle
+  bottles: bottle
+  vial: vial
+  vials: vial
+
+stopwords:
+  - dental
+  - the
+  - and
+  - of
+  - with
+  - for
+  - per
+  - non
+  - sterile

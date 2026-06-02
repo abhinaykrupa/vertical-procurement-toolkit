@@ -1,5 +1,10 @@
 # Vertical Procurement Toolkit
 
+[![CI](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Live Demo](https://img.shields.io/badge/demo-streamlit-ff4b4b)](https://sourceclub-poc.streamlit.app/)
+
 **An open-source reference architecture for automating supplier-invoice savings analysis in fragmented-supplier industries.**
 
 Small businesses in dental, veterinary, optometry, HVAC, auto repair, independent restaurants, and similar verticals all face the same problem: they buy from 3–7 different distributors, every distributor uses different SKUs, different descriptions, different pack sizes, different units of measure — and nobody has time to compare line-by-line whether they're overpaying.
@@ -8,47 +13,83 @@ This repo is the engine that does that comparison automatically. It was original
 
 **Live demo (dental example):** https://sourceclub-poc.streamlit.app/
 
+## Try it in 30 seconds
+
+```bash
+pip install pandas PyYAML
+git clone https://github.com/abhinaykrupa/vertical-procurement-toolkit
+cd vertical-procurement-toolkit
+
+# Run a vet-vertical savings analysis end-to-end (CLI, no UI needed)
+python -m vpt.cli analyze \
+  -s sample_data/sample_clinic_vetcove.csv \
+  -c sample_data/vet_catalog.csv --pretty | head -40
+
+# Or boot the Streamlit UI for the dental example
+pip install streamlit plotly reportlab
+streamlit run app/main.py
+```
+
 ---
 
 ## What's inside
 
 ```
+vpt/                            Public Python package — clean import surface
+  __init__.py                   from vpt import match_invoice, get_adapter, load_catalog
+  cli.py                        `python -m vpt.cli analyze ...`
+  generic_adapter.py            Column-mapped CSV adapter (any vertical, zero adapter code)
+  llm_judge.py                  Real Anthropic / OpenAI Stage-3 judge (mock fallback)
+  uom.py                        Per-vertical UOM table loader
+
 app/
-  main.py                       Streamlit UI — four tabs
+  main.py                       Streamlit reference UI (dental example)
   engine/
     matcher.py                  3-stage matching engine + UOM/pack-size normalizer
     adapters/
-      benco.py                  Per-supplier parser (dental example)
+      benco.py                  Dental — per-supplier parsers
       henry_schein.py
       darby.py
       base86.py
-      patterson.py              Handles messy real-world export
+      patterson.py              Handles deliberately messy real-world export
+      vetcove.py                Veterinary — multi-distributor order history
       auto_detect.py            Supplier auto-detection
   sync/                         Mock Stripe ↔ HubSpot billing rollup (multi-location example)
+
+uom_tables/                     Per-vertical UOM vocabulary (YAML)
+  dental.yaml, vet.yaml, hvac.yaml, restaurant.yaml
+
 sample_data/
-  *_catalog.csv                 Reference catalog (negotiated prices)
-  *_<supplier>.csv              Sample supplier exports
+  sourceclub_catalog.csv        Dental reference catalog
+  vet_catalog.csv               Veterinary reference catalog (~30 SKUs)
+  *_<supplier>.csv              Sample supplier exports (dental + vet)
+
+tests/                          Pytest suite — 40 tests
+.github/workflows/ci.yml        GitHub Actions CI (3.10 / 3.11 / 3.12)
 ADAPTING.md                     ← Read this to adapt to your vertical
 CONTRIBUTING.md                 How to contribute (new adapters, verticals, fixes)
-case-study/                     Original SourceClub case-study deliverables
+CHANGELOG.md                    Versioned changes
+case-study/                     Original SourceClub case-study deliverables (preserved as-is)
 ```
 
 ## The architecture
 
-```
-Upload → Auto-detect supplier → Adapter (per-supplier parser) → Canonical schema
-   ↓
-3-Stage Matching Engine (per line item):
-   Stage 1: Deterministic   — exact SKU / manufacturer SKU lookup
-   Stage 2: Semantic         — fuzzy description + token-overlap retrieval
-   Stage 3: LLM Judge        — adjudicates candidates, generates rationale
-   Cross-cut: UOM / Pack-size normalizer — "box vs case" detection
-   ↓
-Confidence router:
-   ≥ 0.85 → Auto-accept   → Savings report
-   0.60-0.85 → Review queue (human approval)
-   UOM mismatch → Force review
-   < 0.60 → No-match bucket (catalog gap)
+```mermaid
+flowchart TD
+    A[Supplier file upload<br/>CSV / XLSX] --> B[Auto-detect supplier<br/>auto_detect.py]
+    B --> C[Per-supplier adapter<br/>Benco / Vetcove / generic / ...]
+    C --> D[Canonical schema<br/>sku, desc, qty, price, mfg, UOM]
+    D --> E1[Stage 1: Deterministic<br/>exact SKU / mfg-SKU lookup]
+    E1 -->|hit| R[Confidence router]
+    E1 -->|miss| E2[Stage 2: Semantic retrieval<br/>fuzzy + token overlap, top-K]
+    E2 --> E3[Stage 3: LLM Judge<br/>Claude Haiku / GPT-4o-mini<br/>rule-based mock fallback]
+    E3 --> R
+    D -.UOM cross-cut.-> U[UOM / pack-size<br/>normalizer]
+    U --> R
+    R -->|≥ 0.85| AA[Auto-accept<br/>→ savings report]
+    R -->|0.60–0.85| RS[Review queue<br/>human approval]
+    R -->|UOM mismatch| FR[Force review<br/>regardless of confidence]
+    R -->|< 0.60| NM[No-match bucket<br/>→ catalog gap analysis]
 ```
 
 The **3 stages exist because the failure modes are different.** Stage 1 catches the easy 30–40% (clean SKU matches) at zero LLM cost. Stage 2 narrows the candidate space. Stage 3 is where reasoning happens (UOM normalization, manufacturer disambiguation).
@@ -72,6 +113,38 @@ python3 -m venv .venv
 Opens at `http://localhost:8501`. Pick any sample file from the dropdown to see the pipeline run end-to-end.
 
 ---
+
+## Use it programmatically or via CLI
+
+```python
+from vpt import match_invoice, load_catalog, get_adapter
+
+catalog = load_catalog("sample_data/vet_catalog.csv")
+parse = get_adapter("Vetcove")
+invoice = parse(open("sample_data/sample_clinic_vetcove.csv", "rb").read(), "vetcove.csv")
+results = match_invoice(invoice, catalog)
+print(results[["sc_sku", "status", "confidence", "total_savings"]].head())
+```
+
+CLI equivalent:
+
+```bash
+# Auto-detect supplier, output JSON
+python -m vpt.cli analyze -s invoice.csv -c catalog.csv --pretty
+
+# Use the generic adapter for an unknown CSV (no per-supplier adapter needed)
+python -m vpt.cli analyze -s mystery.csv -c catalog.csv \
+  --adapter generic \
+  --map supplier_sku=ItemNum raw_description=ProductName quantity=Qty unit_price=Price
+```
+
+Real LLM for Stage 3 (optional):
+
+```bash
+export LLM_JUDGE_PROVIDER=anthropic  # or 'openai'
+export ANTHROPIC_API_KEY=sk-...
+# Engine now uses Claude for ambiguous matches; mock is used when keys absent.
+```
 
 ## Adapt it to your vertical
 

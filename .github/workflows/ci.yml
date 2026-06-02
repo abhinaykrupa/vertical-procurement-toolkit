@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas PyYAML pytest pytest-cov
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short
+
+      - name: Run CLI smoke test
+        run: |
+          python -m vpt.cli --version
+          python -m vpt.cli adapters
+          python -m vpt.cli detect -s sample_data/auburn_dental_benco.csv
+          python -m vpt.cli analyze \
+            -s sample_data/sample_clinic_vetcove.csv \
+            -c sample_data/vet_catalog.csv \
+            -o /tmp/vet_results.json
+          test -s /tmp/vet_results.json

@@ -1,0 +1,35 @@
+Vetcove Order History Export - Riverside Animal Hospital - 2025 Annual
+Account: 47823
+Period: 2025-01-01 to 2025-12-31
+
+Vendor,Order Date,Item Number,Item Description,Manufacturer,Mfg Part #,Qty Ordered,Unit Price,Extended Total,UOM
+Patterson Vet,2025-01-15,PV-12891,Canine DAPP Vaccine 25-Dose,Zoetis,DAPP-25,8,$98.50,$788.00,vial
+Covetrus,2025-02-03,CV-77231,Rabies 3-yr Imrab 50-Dose Vial,Boehringer Ingelheim,IMR-50,4,$185.00,$740.00,vial
+MWI,2025-02-18,MWI-44012,FVRCP Feline 25 doses,Zoetis,FVRCP-25,6,$82.50,$495.00,vial
+Patterson Vet,2025-03-04,PV-12992,Bordetella Intranasal 25 dose,Merck,BORD-IN-25,5,$62.00,$310.00,vial
+Covetrus,2025-03-12,CV-88412,Isoflurane 100 mL,Piramal,ISOFL-100,12,$45.50,$546.00,bottle
+MWI,2025-04-08,MWI-55102,Sevoflurane 250 mL bottle,Abbott,SEVOFL-250,3,$258.00,$774.00,bottle
+Patterson Vet,2025-04-22,PV-13201,Cefazolin 1g Injection 50ct,Hospira,CEFZ-1G,4,$52.00,$208.00,vial
+Covetrus,2025-05-06,CV-91244,Metronidazole 500mg 100ct,Watson,MTRZ-500,12,$24.00,$288.00,bottle
+MWI,2025-05-19,MWI-61283,Amoxicillin 250mg 500ct,Aurobindo,AMOX-250,8,$42.00,$336.00,bottle
+Patterson Vet,2025-06-02,PV-13455,Carprofen Chewables 75mg 100ct,Zoetis,CARP-75,10,$78.00,$780.00,bottle
+Covetrus,2025-06-15,CV-93011,Gabapentin 100mg 100ct,Amneal,GAB-100,15,$16.50,$247.50,bottle
+MWI,2025-07-01,MWI-67821,Butorphanol Inj 10mg/mL,Zoetis,BUTOR-10,3,$182.00,$546.00,vial
+Patterson Vet,2025-07-14,PV-13701,Vicryl 3-0 Suture FS-2,Ethicon,J385H,6,$52.00,$312.00,box
+Covetrus,2025-07-28,CV-94501,Monocryl 4-0 Suture P-3,Ethicon,Y423H,4,$58.00,$232.00,box
+MWI,2025-08-11,MWI-71204,Sterile Drape 60x60 Fenestrated 25ct,Cardinal,DRP-FN-60,2,$92.00,$184.00,case
+Patterson Vet,2025-08-25,PV-13912,Scalpel Blade #10 100ct,Bard-Parker,BP-10,6,$21.50,$129.00,box
+Covetrus,2025-09-08,CV-95812,Surgical Gloves 6.5 Sterile,Ansell,SG-65,4,$45.00,$180.00,box
+MWI,2025-09-22,MWI-76430,Prophy Paste Mint 200g,Hartz,PRP-MNT-200,8,$28.00,$224.00,tub
+Patterson Vet,2025-10-06,PV-14102,Greenies Dental Chews Med 30ct,Greenies,GR-DC-MD-30,12,$44.00,$528.00,bag
+Covetrus,2025-10-20,CV-97104,Fecal Float Sol Kit 25,Hardy,FCL-25,5,$33.00,$165.00,kit
+MWI,2025-11-03,MWI-81245,Heartworm Snap Test 30pk,IDEXX,SNAP-HW-30,4,$235.00,$940.00,box
+Patterson Vet,2025-11-17,PV-14301,Parvo Snap Test 25pk,IDEXX,SNAP-PV-25,3,$188.00,$564.00,box
+Covetrus,2025-12-01,CV-98201,NexGard Med Dog 3-Month,Boehringer,NXG-MD-3,18,$58.00,$1044.00,box
+MWI,2025-12-15,MWI-85601,Frontline Plus Cat 6-Month,Boehringer,FRT-CAT-6,10,$78.00,$780.00,box
+Patterson Vet,2025-12-22,PV-14501,Hill's a/d Canned Food 156g 24ct,Hills,AD-156,8,$45.00,$360.00,case
+Covetrus,2025-12-28,CV-99012,Hill's k/d Renal 8.5lb,Hills,KD-DRY-85,15,$82.00,$1230.00,bag
+MWI,2025-01-22,MWI-43011,CBC Reagent Pack ProCyte 100ct,IDEXX,REG-PCT-100,2,$185.00,$370.00,pack
+Patterson Vet,2025-02-12,PV-12911,Chem Reagent Pack 50ct,IDEXX,REG-CHM-50,3,$112.00,$336.00,pack
+Covetrus,2025-03-25,CV-89201,Chlorhexidine 2% 1 gal,VetOne,CHL-2-1G,4,$48.00,$192.00,gallon
+MWI,2025-04-15,MWI-54812,Rescue Disinfectant Wipes 200ct,Rescue,RSC-WP-200,20,$17.00,$340.00,canister

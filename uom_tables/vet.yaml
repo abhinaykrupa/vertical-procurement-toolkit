@@ -1,0 +1,50 @@
+# Veterinary UOM vocabulary
+# Vet has dental's pack vocabulary plus pharma-style (ml/L/dose/vial) for medications
+
+aliases:
+  bx: box
+  box: box
+  boxes: box
+  cs: case
+  case: case
+  cases: case
+  bg: bag
+  bag: bag
+  bags: bag
+  pk: pack
+  pack: pack
+  packs: pack
+  ea: each
+  each: each
+  ml: ml
+  l: l
+  liter: l
+  liters: l
+  dose: dose
+  doses: dose
+  vial: vial
+  vials: vial
+  bottle: bottle
+  bottles: bottle
+  tab: tab
+  tabs: tab
+  tablet: tab
+  tablets: tab
+  cap: capsule
+  caps: capsule
+  capsule: capsule
+  capsules: capsule
+  syr: syringe
+  syringe: syringe
+
+stopwords:
+  - veterinary
+  - vet
+  - the
+  - and
+  - of
+  - with
+  - for
+  - per
+  - non
+  - sterile

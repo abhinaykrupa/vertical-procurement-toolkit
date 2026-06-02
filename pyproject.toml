@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vertical-procurement-toolkit"
+version = "0.1.0"
+description = "Open-source reference architecture for automating supplier-invoice savings analysis across fragmented-supplier verticals (dental, vet, HVAC, restaurant, auto)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Abhinay Krupa Gadikoppula", email = "abhinaykrupa@gmail.com" }
+]
+keywords = [
+    "procurement",
+    "invoice-matching",
+    "sku-normalization",
+    "vertical-saas",
+    "gpo",
+    "llm",
+    "retrieval-augmented-generation",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "pandas>=2.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+streamlit = [
+    "streamlit>=1.28",
+    "plotly>=5.17",
+    "reportlab>=4.0",
+]
+llm = [
+    "anthropic>=0.30",
+    "openai>=1.30",
+]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1",
+]
+
+[project.scripts]
+vpt = "vpt.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/abhinaykrupa/vertical-procurement-toolkit"
+Repository = "https://github.com/abhinaykrupa/vertical-procurement-toolkit"
+Issues = "https://github.com/abhinaykrupa/vertical-procurement-toolkit/issues"
+Demo = "https://sourceclub-poc.streamlit.app/"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "vpt*"]
+exclude = ["case-study*", "sample_data*", "tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"

@@ -1,0 +1,51 @@
+# HVAC contractor UOM vocabulary
+# Heavy on weight (refrigerant), volume (oil/lubricant), and length (ductwork)
+
+aliases:
+  ea: each
+  each: each
+  bx: box
+  box: box
+  cs: case
+  case: case
+  pk: pack
+  pack: pack
+  pallet: pallet
+  pallets: pallet
+  drum: drum
+  drums: drum
+  lb: lb
+  lbs: lb
+  pound: lb
+  pounds: lb
+  oz: oz
+  ounce: oz
+  ounces: oz
+  gal: gallon
+  gallon: gallon
+  gallons: gallon
+  qt: quart
+  quart: quart
+  ft: ft
+  feet: ft
+  foot: ft
+  "linear ft": ft
+  in: inch
+  inch: inch
+  inches: inch
+  roll: roll
+  rolls: roll
+  bag: bag
+  bags: bag
+  bundle: bundle
+  bundles: bundle
+
+stopwords:
+  - hvac
+  - the
+  - and
+  - of
+  - with
+  - for
+  - per
+  - non

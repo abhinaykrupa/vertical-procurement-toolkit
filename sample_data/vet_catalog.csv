@@ -1,0 +1,31 @@
+sc_sku,description,manufacturer,mfg_sku,category,unit_of_measure,pack_size,unit_price
+VG-VAC-DAPP-25,Canine DAPP Vaccine 25-Dose Vial,Zoetis,DAPP-25,Vaccines,Vial,25,89.00
+VG-VAC-RABIES-50,Imrab 3 Rabies Vaccine 50-Dose,Boehringer Ingelheim,IMR-50,Vaccines,Vial,50,165.00
+VG-VAC-FVRCP-25,Feline FVRCP Vaccine 25-Dose,Zoetis,FVRCP-25,Vaccines,Vial,25,72.00
+VG-VAC-BORD-25,Bordetella Bronchiseptica 25-Dose Intranasal,Merck,BORD-IN-25,Vaccines,Vial,25,55.00
+VG-ANES-ISOFL-100,Isoflurane USP 100mL Bottle,Piramal,ISOFL-100,Anesthesia,Bottle,100,38.00
+VG-ANES-SEVOFL-250,Sevoflurane 250mL Bottle,Abbott,SEVOFL-250,Anesthesia,Bottle,250,225.00
+VG-ANTI-CEPH-50,Cefazolin 1g Powder for Injection,Hospira,CEFZ-1G,Antibiotics,Vial,50,42.50
+VG-ANTI-METRO-100,Metronidazole 500mg Tablets,Watson,MTRZ-500,Antibiotics,Bottle,100,18.00
+VG-ANTI-AMOX-500,Amoxicillin 250mg Tablets,Aurobindo,AMOX-250,Antibiotics,Bottle,500,32.00
+VG-PAIN-CARP-100,Carprofen 75mg Chewable Tablets,Zoetis,CARP-75,Pain Management,Bottle,100,68.00
+VG-PAIN-GAB-100,Gabapentin 100mg Capsules,Amneal,GAB-100,Pain Management,Bottle,100,12.50
+VG-PAIN-BUTOR-10,Butorphanol 10mg/mL Injectable,Zoetis,BUTOR-10,Pain Management,Vial,10,165.00
+VG-SX-SUTU-VICRYL,Vicryl 3-0 Suture FS-2 18in,Ethicon,J385H,Surgical Consumables,Box,12,42.00
+VG-SX-SUTU-MONOC,Monocryl 4-0 Suture P-3 18in,Ethicon,Y423H,Surgical Consumables,Box,12,52.00
+VG-SX-DRAPE-STERILE,Sterile Surgical Drape 60x60 Fenestrated,Cardinal,DRP-FN-60,Surgical Consumables,Case,25,78.00
+VG-SX-BLADE-10,Scalpel Blade #10 Stainless Steel,Bard-Parker,BP-10,Surgical Consumables,Box,100,16.50
+VG-SX-GLOVES-65,Sterile Surgical Gloves Size 6.5,Ansell,SG-65,Surgical Consumables,Box,50,38.00
+VG-DENT-PROPHY-PASTE,Prophy Paste Mint 200g Tub,Hartz,PRP-MNT-200,Dental,Tub,200,22.00
+VG-DENT-CHEWS-MD,VOHC Dental Chews Medium Breed,Greenies,GR-DC-MD-30,Dental,Bag,30,38.00
+VG-DIAG-FECAL-25,Fecal Float Solution 25 Tests,Hardy,FCL-25,Diagnostics,Kit,25,28.00
+VG-DIAG-HW-30,Heartworm Antigen Test 30-Pack,IDEXX,SNAP-HW-30,Diagnostics,Box,30,210.00
+VG-DIAG-PARVO-25,Canine Parvo Snap Test 25-Pack,IDEXX,SNAP-PV-25,Diagnostics,Box,25,165.00
+VG-FLEA-NEXGUARD-3M,NexGard Chewables Medium Dog 3-Month,Boehringer,NXG-MD-3,Parasite Prevention,Box,3,52.00
+VG-FLEA-FRONT-6M,Frontline Plus Cat 6-Month,Boehringer,FRT-CAT-6,Parasite Prevention,Box,6,72.00
+VG-NUTR-AD-CAN,Hill's a/d Critical Care Canned 156g,Hills,AD-156,Nutrition,Case,24,38.00
+VG-NUTR-KD-DRY,Hill's k/d Renal Dry 8.5lb Canine,Hills,KD-DRY-85,Nutrition,Bag,1,72.00
+VG-LAB-CBC-100,CBC Reagent Pack for IDEXX ProCyte,IDEXX,REG-PCT-100,Laboratory,Pack,100,165.00
+VG-LAB-CHEM-50,Chemistry Reagent Pack 50-Test,IDEXX,REG-CHM-50,Laboratory,Pack,50,98.00
+VG-CLEAN-CHLOR-1G,Chlorhexidine 2% Solution 1 Gallon,VetOne,CHL-2-1G,Cleaning & Disinfection,Gallon,1,42.00
+VG-CLEAN-WIPES-200,Disinfectant Wipes 200-Count Canister,Rescue,RSC-WP-200,Cleaning & Disinfection,Canister,200,14.00

@@ -1,0 +1,56 @@
+# Independent restaurant / foodservice UOM vocabulary
+# Foodservice has unique containers (#10 can, 5-gal pail) and weight conventions
+
+aliases:
+  ea: each
+  each: each
+  case: case
+  cs: case
+  cases: case
+  pack: pack
+  pk: pack
+  packs: pack
+  bag: bag
+  bg: bag
+  bags: bag
+  lb: lb
+  lbs: lb
+  pound: lb
+  pounds: lb
+  oz: oz
+  ounce: oz
+  ounces: oz
+  gal: gallon
+  gallon: gallon
+  gallons: gallon
+  qt: quart
+  quart: quart
+  pt: pint
+  pint: pint
+  pail: pail
+  pails: pail
+  tub: tub
+  tubs: tub
+  can: can
+  cans: can
+  jar: jar
+  jars: jar
+  bottle: bottle
+  btl: bottle
+  bottles: bottle
+  bushel: bushel
+  carton: carton
+  ctn: carton
+  cartons: carton
+
+stopwords:
+  - restaurant
+  - foodservice
+  - food
+  - service
+  - the
+  - and
+  - of
+  - with
+  - for
+  - per

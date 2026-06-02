@@ -33,3 +33,14 @@ output/
 
 # Logs
 *.log
+
+# Virtualenv & build artifacts
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+__pycache__/
+*.pyc
+.coverage

@@ -13,6 +13,8 @@ def detect(file_bytes: bytes, filename: str) -> str:
         return "Darby"
     if "patterson" in filename_lower or "ptn" in filename_lower:
         return "Patterson"
+    if "vetcove" in filename_lower or "vc_" in filename_lower:
+        return "Vetcove"
 
     try:
         header = file_bytes[:2000].decode("utf-8", errors="ignore").lower()
@@ -26,6 +28,8 @@ def detect(file_bytes: bytes, filename: str) -> str:
             return "Darby"
         if "patterson" in header:
             return "Patterson"
+        if "vetcove" in header:
+            return "Vetcove"
     except Exception:
         pass
 
