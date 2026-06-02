@@ -1,184 +1,142 @@
-# Launch post — LinkedIn / Medium
+# Launch posts — ready to publish
 
-Two versions: a shorter LinkedIn-native post, and a longer Medium / blog version. Pick one. Both link back to the repo.
+All drafts below link to **https://github.com/abhinaykrupa/vertical-procurement-toolkit**.
+Nothing here is posted automatically — pick what fits and publish when you're ready.
 
----
-
-## Version 1 — LinkedIn (650 words)
-
-**Title options (pick one):**
-- I open-sourced a procurement intelligence engine that started life as a dental GPO case study
-- The architecture pattern behind vertical procurement: from a dental case study to an open-source toolkit
-- Built a savings-analysis engine for an interview. Open-sourced it because the same architecture works for vet, HVAC, restaurant, auto.
+**Before posting:** add a real Streamlit screenshot to the README (the hero SVG works, but a product screenshot converts better), and pin the repo on your GitHub profile.
 
 ---
 
-I just open-sourced something I built for a job interview.
+## 1. LinkedIn (≈600 words)
 
-The role was Head of AI Powered Operations at a dental Group Purchasing Organization. The case study asked me to design a system that automates "savings analysis" — taking a prospect's supplier purchase history, comparing each line against the GPO's negotiated catalog, and showing the prospect their potential savings.
-
-What looks simple is actually three different problems stacked:
-
-**1. Every supplier exports a different shape.** Benco, Henry Schein, Darby, Patterson, Base86 — each has its own CSV format, its own column names, its own quirks. Patterson's export has $-prefixed prices, embedded commas, blank rows, and footer rows that look like data. You can't match anything until you've normalized the input.
-
-**2. The same product has different SKUs across distributors.** "Nitrile Gloves, Medium, Powder-Free" might be Benco #4471-203, Henry Schein #100-1234, Darby #DG-MED-N. The manufacturer SKU is the same when present, but it often isn't. Fuzzy description matching gets you 60% of the way, then breaks on edge cases.
-
-**3. UOM and pack-size mismatches are the actual killer.** "Box of 100" vs "case of 10 boxes" looks like the same product but the unit economics differ by 10x. This is the single most-called-out failure mode when you talk to people who do this work manually.
-
-The architecture I landed on:
-
-→ **Per-supplier adapters** — one Python module per distributor format, all producing the same canonical schema. This isolates "real-world chaos" from "matching logic."
-
-→ **3-stage matching engine.** Stage 1 (deterministic SKU match) catches 30-40% at zero LLM cost. Stage 2 (semantic retrieval) narrows the candidate space. Stage 3 (LLM judge) does the reasoning that actually requires a model. Three stages because the failure modes are different and each stage uses the right tool for its problem.
-
-→ **UOM/pack-size normalizer as its own concern.** Cross-cuts all 3 stages. Regex tables + alias dictionaries that detect "box vs case" style mismatches and force human review even when other signals align.
-
-→ **Confidence router** sending high-confidence matches to auto-accept, medium to a review queue, low to a no-match bucket that feeds catalog gap analysis.
-
-The interview didn't end up working out. But while researching the broader market, I realized this exact problem exists in every fragmented-supplier vertical: veterinary (~30K clinics), HVAC (~120K contractors), independent restaurants, auto repair (~160K shops), independent pharmacy, optometry.
-
-Most of those verticals already have a vendor-funded incumbent — Vetcove in vet, PartsTech in auto, PSAOs in pharmacy. But **HVAC and independent restaurants have no Vetcove-equivalent**. And in every vertical, contractors / clinics / shops are still doing this analysis by hand or not at all.
-
-So I extracted the engine, generalized it, and put it under MIT license:
-
-🔗 **https://github.com/abhinaykrupa/vertical-procurement-toolkit**
-
-What's there:
-- Working Streamlit app with 5 dental supplier adapters
-- The 3-stage matcher + UOM normalizer (the actual reusable IP)
-- An ADAPTING.md that walks through how to swap in your vertical in ~30 minutes
-- A live demo: https://sourceclub-poc.streamlit.app/
-- Open issues tagged "good first issue" for the next adapters: Vetcove, Sysco, Ferguson HVAC
-
-If you work in procurement, vertical SaaS, or just want to see a clean reference architecture for invoice matching with LLMs — take a look.
-
-If you're in a fragmented-supplier vertical and want to fork it for your industry, even better. Open an issue and I'll help.
-
-#OpenSource #VerticalSaaS #Procurement #AI #LLM
+**Title options:**
+- I built a procurement engine for a dental GPO interview. They passed. I open-sourced it — and it works for 4 industries now.
+- The architecture pattern behind vertical procurement, open-sourced
+- From one dental case study to a 4-vertical open-source toolkit
 
 ---
 
-## Version 2 — Medium / blog (1,400 words)
+I built a savings-analysis engine for a job interview. The role didn't work out. So I open-sourced the work — and over the last few nights generalized it so it now runs on four different industries with zero changes to the core engine.
 
-**Title:** What I learned building a procurement intelligence engine for a dental GPO interview — and why I open-sourced it after they passed
+**The problem it solves:** small businesses — dental practices, vet clinics, HVAC contractors, independent restaurants — buy from 3-7 different distributors. Every distributor uses different SKUs, different descriptions, different pack sizes, different units of measure. Nobody has time to compare line-by-line whether they're overpaying. So they overpay.
+
+The hard part isn't the comparison. It's the matching. "Box of 100 nitrile gloves" at one distributor and "Nitrile Exam PF MD 100/bx" at another are the same product — a human knows that instantly, software has to be taught.
+
+**The architecture:**
+
+→ **Per-supplier adapters** turn each distributor's bespoke export into one canonical schema. Real exports are chaos — $-prefixed prices, embedded commas, footer rows, mixed UOM formats. Isolate that mess in the adapter, keep the matcher clean.
+
+→ **3-stage matcher.** Stage 1 (exact SKU match) catches the easy 30-40% at zero LLM cost. Stage 2 (semantic retrieval) narrows candidates. Stage 3 (LLM judge — Claude or GPT, with a mock fallback) does the reasoning. Each stage uses the right tool for its failure mode.
+
+→ **UOM/pack-size normalizer** runs cross-cut to all three. "Box of 100" vs "case of 10 boxes" looks identical on description but the unit economics differ 10x. This is the single most important check, and it forces human review on mismatch even when everything else aligns.
+
+→ **Confidence router** sends high-confidence matches to auto-accept, medium to a review queue, low to a no-match bucket that doubles as catalog-gap analysis.
+
+**The part I'm proud of:** it actually generalizes. Same engine, four verticals, all shipping with working examples and real numbers:
+
+- 🦷 Dental — 5 supplier adapters
+- 🐾 Vet (Vetcove) — $1.9K savings found on a $14K sample
+- 🔧 HVAC (Ferguson) — $10.4K on $65K, plus it correctly flagged 1 catalog gap
+- 🍽️ Restaurant (Sysco) — $8.2K on $75K, handling foodservice pack-size chaos
+
+Adding a vertical is ~30 minutes: a catalog CSV, a ~40-line adapter, a UOM vocabulary file. There's a guide.
+
+It's MIT licensed, has a CLI, a Python API, a generic CSV adapter for unknown formats, 50 tests, CI on Python 3.10-3.12, and "good first issue" tickets for the next adapters (more HVAC brands, US Foods, auto parts, pharmacy).
+
+🔗 https://github.com/abhinaykrupa/vertical-procurement-toolkit
+
+If you work in procurement, vertical SaaS, or run a business that buys from multiple distributors — take a look. If you want to fork it for your industry, even better. Open an issue and I'll help.
+
+#OpenSource #VerticalSaaS #Procurement #AI #Python
 
 ---
 
-Three months ago I started preparing for an interview at a small dental Group Purchasing Organization (GPO). The role was Head of AI Powered Operations, Systems & RevOps — a player-coach position at a 7-person company growing through what the CEO called "hockey-stick" growth.
+## 2. Show HN
 
-The case study had three assignments. The headline one was: automate the savings analysis.
+**Title:** Show HN: Open-source supplier-invoice savings analysis (dental, vet, HVAC, restaurant)
 
-### What "savings analysis" actually means
+**URL:** https://github.com/abhinaykrupa/vertical-procurement-toolkit
 
-When a dental practice is considering joining a GPO, the GPO runs a "savings analysis." They take the practice's purchase history — a CSV export of everything they buy from their current supplier — and compare each line against the GPO's negotiated pricing catalog. The output is a report showing the practice their potential savings.
+**Text (first comment):**
 
-This is the close. At this GPO, 90% of practices who see their numbers join. The savings analysis isn't a step toward the close — it *is* the close.
+I built this for a dental Group Purchasing Organization job interview — the task was to automate "savings analysis": take a prospect's supplier purchase history, match each line against a negotiated-price catalog, show them what they'd save. The role didn't pan out, so I generalized the work and open-sourced it.
 
-The catch: the founder did this by hand. About 10 minutes per analysis, 20-40 times a month. The case study asked me to design how I'd automate it.
+The interesting problem is matching. The same physical product has different SKUs, descriptions, and pack sizes across distributors. A box of gloves is "BEN-4471 Nitrile PF MD 100/bx" at one and "Nitrile Exam Gloves Powder-Free Medium" at another. Fuzzy string matching gets you ~60% and then breaks on unit-of-measure mismatches — "box of 100" vs "case of 10 boxes" looks like the same item but the economics differ 10x.
 
-### Why the matching problem is harder than it looks
+The approach is a 3-stage pipeline: (1) deterministic SKU match for the easy ~30-40% at zero LLM cost, (2) fuzzy/semantic retrieval to narrow candidates, (3) an LLM judge (Claude/GPT, with a rule-based mock fallback so it runs offline) for the ambiguous ones. A UOM/pack-size normalizer runs cross-cut and forces human review on mismatch regardless of confidence.
 
-The naive approach — VLOOKUP the prospect's SKUs against the GPO catalog — fails immediately. Here's why:
+What I think is interesting for HN: it genuinely generalizes across verticals. Same matcher, zero changes, four working examples — dental, vet (Vetcove exports), HVAC (Ferguson), restaurant (Sysco, including their delightful "6/#10 CAN" pack notation). Adding a vertical is a catalog CSV + a ~40-line adapter + a YAML UOM vocab file.
 
-**Supplier exports are bespoke.** Every distributor has their own format. Benco's CSV has 3 header rows and SKUs prefixed with "BEN". Henry Schein's report has a totally different column structure. Patterson's export — which I built a deliberately messy sample of — has $-prefixed prices, embedded commas, blank rows, and footer rows that look like real data. Before you can match anything, you have to parse five different shapes into one.
+Stack is deliberately boring: pandas, a CLI, a Streamlit demo, optional real-LLM behind an env flag. MIT. 50 tests, CI on 3.10-3.12.
 
-**The same physical product has different SKUs across distributors.** A box of nitrile gloves might be Benco #4471-203, Henry Schein #100-1234, Darby #DG-MED-N. When the manufacturer SKU is present, you can match on that — but often it's missing, abbreviated, or wrong.
+Happy to answer questions about the matching design, the UOM problem (which is the actual hard part), or where this does and doesn't generalize. Notably it does NOT make sense in verticals with standardized SKUs (pharma NDC, retail UPC) where stage-1 is trivial, or where one distributor has >80% share so there's nothing to compare.
 
-**Pack-size and unit-of-measure mismatches break the economics.** "Box of 100" vs "case of 10 boxes" looks like the same product if you're just comparing descriptions. But the unit price differs by 10x. This was the single most-called-out failure mode when I watched videos of the founder doing this work manually.
+**Notes on Show HN:**
+- Post Tue-Thu, 8-10am ET for best visibility
+- Be present in comments for the first 2 hours — HN rewards engagement
+- Expect pushback on "why not just use [X]" and "where's the moat" — lean into honest answers (it's a toolkit, not a business; the moat in a real product would be catalog data, not the code)
 
-### The architecture
+---
 
-After two days of prototyping and tearing up two versions, I landed on this shape:
+## 3. Reddit
 
-```
-Upload → Auto-detect supplier → Per-supplier adapter → Canonical schema
-   ↓
-3-stage matching engine (per line item):
-   Stage 1: Deterministic   — exact SKU / mfg SKU lookup
-   Stage 2: Semantic         — fuzzy description + token overlap retrieval
-   Stage 3: LLM judge        — adjudicates candidates, generates rationale
-   Cross-cut: UOM/pack-size normalizer
-   ↓
-Confidence router:
-   ≥ 0.85 → Auto-accept   → Savings report
-   0.60-0.85 → Review queue (human approval)
-   UOM mismatch → Force review
-   < 0.60 → No-match bucket (catalog gap analysis)
-```
+### r/Python (focus: the engineering)
 
-**Three observations on why this shape works:**
+**Title:** I open-sourced a supplier-invoice matching engine — 3-stage matcher (deterministic → semantic → LLM judge) that generalizes across industries
 
-1. **Three stages, not one.** Stage 1 catches the easy 30-40% of line items (clean SKU matches) at zero LLM cost. Stage 2 narrows the candidate space — having an LLM judge 500 catalog items per line is wasteful and noisy. Stage 3 is where actual reasoning happens. Each stage uses the right tool for its problem.
+**Body:**
 
-2. **Adapters before matching, not embedded in matching.** This is the biggest lesson from real-world supplier data: you cannot do matching and parsing in the same pass. Separating them means adding a new supplier is a 40-line module, not a refactor of the matcher.
+Built originally for a dental procurement case study, generalized to four verticals (dental, vet, HVAC, restaurant). The core problem: match a messy supplier CSV against a price catalog when SKUs, descriptions, and pack sizes all differ across distributors.
 
-3. **UOM normalization is its own concern.** It cross-cuts the 3 stages and runs as a parallel check. UOM mismatches force review even when description and manufacturer align — because the unit economics math breaks.
+Design highlights Pythonistas might find interesting:
+- Per-supplier adapters (each ~40 lines) isolate real-world CSV chaos from matching logic
+- 3-stage matcher: exact SKU → fuzzy/token retrieval → LLM judge (Claude/GPT behind an env flag, mock fallback so it runs with just `pip install pandas`)
+- UOM/pack-size normalizer with per-vertical YAML vocabularies
+- Clean `vpt` package + CLI + Streamlit demo
+- 50 tests, CI on 3.10-3.12, ruff, pre-commit
 
-### The interview didn't work out
+MIT licensed, "good first issue" tickets open for new adapters.
 
-I built the POC. Shipped it as a Streamlit app you can drive end-to-end. Wrote a 27-page submission doc covering the architecture, a Stripe-HubSpot multi-location sync proposal for assignment 2, and a 90-day roadmap for assignment 3 — with 10 new project proposals sized in dollars.
+🔗 https://github.com/abhinaykrupa/vertical-procurement-toolkit
 
-I interviewed with their VP of Growth. Wrote a 4-page strategic addendum the night before about how I'd position SourceClub against Synergy (the dominant dental GPO) and Alara (the YC-backed challenger). Did the prep, did the call.
+Feedback on the architecture welcome — especially the stage-2 retrieval, which currently uses difflib + token overlap and is the obvious place to swap in real embeddings.
 
-A week later, the recruiter passed. No specific feedback. My guess: comp expectations.
+### r/smallbusiness (focus: the use case — link sparingly, lead with value)
 
-### Why I open-sourced it
+**Title:** If you buy supplies from multiple distributors, you're probably overpaying on items you can't easily compare — built a free tool for this
 
-While researching the broader market for the interview prep, I realized something. This exact problem — fragmented suppliers, inconsistent SKUs, UOM chaos, manual savings analysis — exists in every vertical I looked at:
+**Body:**
 
-- **Veterinary** (~30K clinics) — Vetcove already solved it, owns the vertical
-- **Auto repair** (~160K shops) — PartsTech already solved it, 30K+ shops adopted
-- **Independent pharmacy** (~25K) — PSAOs already solved it, 89% coverage
-- **Independent restaurants** — Dining Alliance exists but coverage uncertain
-- **HVAC** (~120K contractors) — **no equivalent identified**
+If your business orders from 3+ suppliers (think dental, vet, HVAC, restaurant, auto), you've probably had the nagging feeling you're overpaying somewhere but never had time to compare every line item across every distributor. The problem is that the same product is listed differently everywhere — different codes, different pack sizes — so a simple spreadsheet comparison doesn't work.
 
-Three verticals captured. Two open. And in every vertical, the small shops not on a platform are still doing the analysis by hand or not at all.
+I built a free, open-source tool that does the matching automatically: upload your purchase history, it compares against a price catalog and shows you where you're overpaying. It's currently set up with examples for dental, vet, HVAC, and restaurant supply.
 
-The architecture I built for dental isn't dental-specific. The catalog graph, the 3-stage matcher, the UOM normalizer — they work for any fragmented-supplier vertical. The only vertical-specific pieces are (a) the catalog file and (b) the supplier adapters.
+Full disclosure: it's a developer tool right now (you run it locally), not a polished consumer app — but it's free, and if there's interest I'm happy to make it more accessible. Mostly sharing because the "you're overpaying and can't easily see it" problem is so common.
 
-So I extracted the engine, generalized the docs, and put it under MIT license.
+🔗 https://github.com/abhinaykrupa/vertical-procurement-toolkit (GitHub)
 
-🔗 **https://github.com/abhinaykrupa/vertical-procurement-toolkit**
+Would genuinely like to hear: which suppliers do you use, and would a simple "upload invoice, see savings" tool be useful to you?
 
-### What's in the repo
+**Notes on Reddit:**
+- r/Python and r/programming are safe to link directly
+- r/smallbusiness, r/restaurateur, r/HVAC, r/Dentistry are stricter on self-promo — read each sub's rules, lead with value, and don't drop the same text in multiple subs the same day (looks like spam)
+- The vertical subs (r/HVAC, r/restaurateur) are higher-value but higher-risk — consider posting as a question/discussion rather than a launch
 
-- A working Streamlit app you can run locally in 2 minutes (`pip install -r requirements.txt` + `streamlit run app/main.py`)
-- 5 dental supplier adapters as worked examples
-- The 3-stage matching engine + UOM normalizer — the actual reusable IP
-- An ADAPTING.md walkthrough for swapping in your own vertical (~30 min for a basic adapter)
-- A CONTRIBUTING.md explaining the contribution process
-- "Good first issue" entry points for the next adapters: Vetcove, Sysco, Ferguson HVAC, generic-CSV
-- Production-architecture doc covering the swap-in points: pgvector for Stage 2, real LLM calls for Stage 3, etc.
-- The original SourceClub case-study deliverables in `case-study/` if you want to see how the architecture was justified to a business audience
+---
 
-### Who this is for
+## 4. Indie Hackers / Dev.to (optional)
 
-- **Vertical SaaS founders** building procurement tools for vet, HVAC, restaurant, auto, or any other fragmented-supplier industry — fork it, ship faster
-- **GPO operators** in non-dental verticals who want a starting point for their own savings analysis tooling
-- **Engineers** who want a clean reference architecture for invoice matching with LLM augmentation
-- **Anyone interviewing for procurement / RevOps / vertical SaaS roles** who wants to see a worked example
-
-### Where it goes from here
-
-Honestly, I'm not sure. I'm not planning to build a company around this. But I'd love to see other contributors add adapters for their verticals, and I'm happy to maintain the core architecture and review PRs.
-
-If you build something on top of it, I want to hear about it.
-
-If you fork it for your vertical and it works, open a PR with the adapter so the next person doesn't have to do it from scratch.
-
-If you're in HVAC or independent restaurants and want to do something interesting with this, reach out.
-
-🔗 **https://github.com/abhinaykrupa/vertical-procurement-toolkit**
-🔗 **Live demo:** https://sourceclub-poc.streamlit.app/
+Cross-post the Medium long-form version (below) as a Dev.to article with tags `#opensource #python #ai`. On Indie Hackers, post as a "milestone" with the short LinkedIn version. Both are low-effort cross-posts once the Medium piece exists.
 
 ---
 
 ## Posting checklist
 
-- [ ] Push repo to GitHub first (so links work when post goes live)
-- [ ] Add a hero screenshot to README before posting (Patterson messy file → matched results, or Leadership Dashboard)
-- [ ] Post on LinkedIn (Version 1)
-- [ ] Cross-post on Medium / personal blog (Version 2)
-- [ ] Cross-post to HackerNews? Risky — they'll either love it or eat you alive on the OSS-without-clear-moat angle. Skip unless you have thick skin.
-- [ ] Cross-post to relevant subreddits: r/programming (Version 1), r/Python (Version 1), r/smallbusiness (link only with a 1-line summary), r/dentistry (if you want to test the dental community)
-- [ ] Submit to Indie Hackers as a "milestone"
+- [ ] Add a real Streamlit screenshot to README (replaces or supplements the hero SVG)
+- [ ] Pin the repo on your GitHub profile
+- [ ] Enable GitHub Discussions (Settings → Features) — issue templates already route questions there
+- [ ] Post LinkedIn version
+- [ ] Post Show HN (Tue-Thu morning ET, be present for comments)
+- [ ] Post r/Python
+- [ ] Cross-post Medium long-form (see git history / earlier draft if you want the 1,400-word version)
+- [ ] Optional: r/smallbusiness, vertical subs, Dev.to, Indie Hackers
