@@ -15,14 +15,15 @@ Small businesses in dental, veterinary, optometry, HVAC, auto repair, independen
 
 This repo is the engine that does that comparison automatically. It was originally built as a case study for a dental Group Purchasing Organization, but the architecture is vertical-agnostic — swap the catalog and add a supplier adapter, and the same engine works for any fragmented-supplier vertical.
 
-**Four verticals ship with working examples today** — same engine, zero matcher changes:
+**Five verticals ship with working examples today** — same engine, zero matcher changes:
 
 | Vertical | Adapter | Sample export | Result on bundled sample |
 |---|---|---|---|
-| 🦷 Dental | Benco, Henry Schein, Darby, Base86, Patterson | 5 files | match + savings report |
+| 🦷 Dental | Benco, Henry Schein, Darby, Base86, Patterson | 6 files | match + savings report |
 | 🐾 Veterinary | Vetcove (multi-distributor) | 1 file | 30 lines · $14.2K spend · **$1.9K savings** |
 | 🔧 HVAC | Ferguson | 1 file | 30 lines · $64.8K spend · **$10.4K savings** · 1 catalog gap |
 | 🍽️ Restaurant | Sysco | 1 file | 30 lines · $74.8K spend · **$8.2K savings** |
+| 👓 Optometry | VSP/Essilor | 1 file | 30 lines · $98.8K spend · **$12.3K savings** · 1 catalog gap |
 
 **Live demo (dental example):** https://sourceclub-poc.streamlit.app/
 
@@ -68,11 +69,12 @@ app/
       vetcove.py                Veterinary — multi-distributor order history
       ferguson.py               HVAC — Ferguson supply export
       sysco.py                  Restaurant — Sysco foodservice export
+      vsp.py                    Optometry — VSP/Essilor order export
       auto_detect.py            Supplier auto-detection
   sync/                         Mock Stripe ↔ HubSpot billing rollup (multi-location example)
 
 uom_tables/                     Per-vertical UOM vocabulary (YAML)
-  dental.yaml, vet.yaml, hvac.yaml, restaurant.yaml
+  dental.yaml, vet.yaml, hvac.yaml, restaurant.yaml, optometry.yaml
 
 sample_data/
   sourceclub_catalog.csv        Dental reference catalog
@@ -145,6 +147,7 @@ Run `python scripts/benchmark.py` to reproduce. Real numbers on the bundled samp
 | Vet | Vetcove | 30 | 100% | 0% | 0% | $1,868 (13%) |
 | HVAC | Ferguson | 30 | 97% | 0% | 3% | $10,411 (16%) |
 | Restaurant | Sysco | 30 | 100% | 0% | 0% | $8,171 (11%) |
+| Optometry | VSP/Essilor | 30 | 97% | 0% | 3% | $12,310 (12%) |
 
 The spread is the point. Files with clean manufacturer SKUs (Benco, Vetcove) auto-accept at 90-100%. Files with no mfg SKUs and messy formatting (Patterson) drop to 8% auto-accept and 44% no-match — and that's **correct behavior**, not failure. The no-match bucket feeds catalog-gap analysis, and the review queue catches the ambiguous middle. Human-in-the-loop is the spec.
 

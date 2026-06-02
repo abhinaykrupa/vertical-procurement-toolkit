@@ -1,0 +1,31 @@
+sc_sku,description,manufacturer,mfg_sku,category,unit_of_measure,pack_size,unit_price
+OPT-CL-ACU-OX-6,Acuvue Oasys 6-Pack 2-Week,Johnson & Johnson,AOH-6,Contact Lenses,Box,6,28.00
+OPT-CL-BIO-6,Biofinity 6-Pack Monthly,CooperVision,BIO-6,Contact Lenses,Box,6,32.00
+OPT-CL-DAILIES-90,Dailies Total 1 90-Pack,Alcon,DT1-90,Contact Lenses,Box,90,68.00
+OPT-CL-AIR-90,Air Optix Plus 90-Pack,Alcon,AOP-90,Contact Lenses,Box,90,72.00
+OPT-CL-MYDAY-90,MyDay Daily 90-Pack,CooperVision,MYD-90,Contact Lenses,Box,90,64.00
+OPT-LENS-SV-CR39,Single Vision CR-39 Uncut Lens Pair,Essilor,SV-CR39,Lenses,Pair,1,8.50
+OPT-LENS-SV-POLY,Single Vision Polycarbonate Pair,Essilor,SV-POLY,Lenses,Pair,1,14.00
+OPT-LENS-PROG-167,Progressive 1.67 High-Index Pair,Essilor,PRG-167,Lenses,Pair,1,68.00
+OPT-LENS-VARILUX-X,Varilux X Series Progressive Pair,Essilor,VAR-X,Lenses,Pair,1,142.00
+OPT-COAT-CRIZAL,Crizal Sapphire AR Coating,Essilor,CRZ-SAP,Lens Coatings,Pair,1,38.00
+OPT-COAT-TRANS-G8,Transitions Gen 8 Treatment,Transitions,TR-G8,Lens Coatings,Pair,1,58.00
+OPT-FRAME-RB-2140,Ray-Ban Wayfarer 2140 Frame,Luxottica,RB2140,Frames,Each,1,78.00
+OPT-FRAME-OAK-9208,Oakley Sport Frame 9208,Luxottica,OAK9208,Frames,Each,1,98.00
+OPT-FRAME-FLEX-TI,Flexible Titanium Frame,Marchon,FLX-TI,Frames,Each,1,42.00
+OPT-FRAME-KIDS-FX,Kids Flexible Frame Assorted,Marchon,KID-FX,Frames,Each,1,18.00
+OPT-SOL-OPTI-12,Opti-Free PureMoist 10oz,Alcon,OPF-12,Solutions,Case,12,68.00
+OPT-SOL-BIOTRUE-12,Biotrue Multi-Purpose 10oz,Bausch & Lomb,BIO-12,Solutions,Case,12,62.00
+OPT-SOL-CLEAR-24,Clear Care Hydrogen Peroxide 12oz,Alcon,CC-24,Solutions,Case,24,98.00
+OPT-DROP-SYSTANE-24,Systane Ultra Lubricant Drops,Alcon,SYS-24,Eye Drops,Case,24,142.00
+OPT-DROP-REFRESH-24,Refresh Tears 0.5oz,Allergan,REF-24,Eye Drops,Case,24,128.00
+OPT-DIAG-FLUOR-100,Fluorescein Strips 100-Pack,Bausch & Lomb,FLU-100,Diagnostics,Box,100,14.00
+OPT-DIAG-DILATE-25,Tropicamide 1% Dilation 15mL,Akorn,TRO-15,Diagnostics,Bottle,25,18.00
+OPT-CASE-LENS-50,Contact Lens Cases 50-Pack,Menicon,CLC-50,Accessories,Bag,50,12.00
+OPT-CLOTH-MICRO-100,Microfiber Cleaning Cloth 100-Pack,Hilco,MF-100,Accessories,Box,100,32.00
+OPT-SPRAY-CLEAN-24,Lens Cleaning Spray 2oz,Hilco,LCS-24,Accessories,Case,24,42.00
+OPT-CHAIN-CORD-50,Eyeglass Cord Retainer 50-Pack,Hilco,ECR-50,Accessories,Bag,50,18.00
+OPT-TRIAL-SV-266,Single Vision Trial Lens Set 266pc,Reichert,TLS-266,Equipment,Set,1,285.00
+OPT-PAPER-CHIN-500,Chin Rest Tissue Paper 500-Pack,Reichert,CRT-500,Disposables,Box,500,8.00
+OPT-PUFF-TONO-200,Tonometer Tips Disposable 200pk,Reichert,TON-200,Disposables,Box,200,68.00
+OPT-WIPE-LENS-600,Pre-Moistened Lens Wipes 600ct,Zeiss,LW-600,Disposables,Box,600,24.00

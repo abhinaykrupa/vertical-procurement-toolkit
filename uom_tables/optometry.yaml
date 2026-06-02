@@ -1,0 +1,37 @@
+# Optometry UOM vocabulary
+# Contacts by box-pack, lenses by pair, frames by each, solutions by case
+
+aliases:
+  ea: each
+  each: each
+  box: box
+  bx: box
+  boxes: box
+  case: case
+  cs: case
+  cases: case
+  bag: bag
+  bg: bag
+  pair: pair
+  pr: pair
+  pairs: pair
+  bottle: bottle
+  btl: bottle
+  bottles: bottle
+  pack: pack
+  pk: pack
+  set: set
+  sets: set
+  oz: oz
+  ounce: oz
+  ml: ml
+
+stopwords:
+  - optical
+  - optometry
+  - the
+  - and
+  - of
+  - with
+  - for
+  - per

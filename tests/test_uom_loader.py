@@ -37,9 +37,16 @@ def test_restaurant_uom_table_includes_foodservice_vocab():
     assert table["aliases"]["bushel"] == "bushel"
 
 
+def test_optometry_uom_table_includes_pair_box():
+    table = load_uom_table("optometry")
+    assert table["aliases"]["pair"] == "pair"
+    assert table["aliases"]["pr"] == "pair"
+    assert table["aliases"]["box"] == "box"
+
+
 def test_list_available_returns_known_verticals():
     available = list_available()
-    for vertical in ("dental", "vet", "hvac", "restaurant"):
+    for vertical in ("dental", "vet", "hvac", "restaurant", "optometry"):
         assert vertical in available, f"{vertical} should be available"
 
 

@@ -6,6 +6,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This project f
 ## [Unreleased]
 
 ### Added (later in v0.2 cycle)
+- **Optometry vertical** (5th vertical): VSP/Essilor adapter, 30-SKU catalog (contacts, lenses, frames, coatings, solutions, drops, diagnostics), sample export, uom_tables/optometry.yaml. End-to-end: 30 lines, $98.8K spend, $12.3K savings, 1 catalog gap.
+- **Multi-supplier comparison** (`vpt compare`, `vpt/compare.py`): given the same vertical's purchase history from multiple distributors, finds the cheapest supplier per item and total potential savings — the cross-distributor value prop single-vendor clubs can't offer.
+- **Benchmark script** (`scripts/benchmark.py`): honest per-vertical match-rate table across all bundled samples; surfaced in the README.
 - **HVAC vertical** (closes #3): Ferguson adapter, 30-SKU HVAC catalog (refrigerant, capacitors, motors, ductwork, coils, ignition), sample export. End-to-end: 30 lines, $10.4K savings, 1 deliberate catalog gap.
 - **Restaurant vertical** (closes #2): Sysco adapter (handles foodservice pack-size conventions like "6/#10 CAN", "5 GAL PAIL", quoted-comma totals), 30-SKU foodservice catalog, sample export. End-to-end: 30 lines, $8.2K savings.
 - `vpt validate` CLI command — checks catalog for required columns, numeric prices, duplicate/blank SKUs; exits non-zero on problems

@@ -39,6 +39,7 @@ CASES = [
     ("sample_clinic_vetcove.csv", "vet_catalog.csv"),
     ("comfort_pro_ferguson.csv", "hvac_catalog.csv"),
     ("bistro_24_sysco.csv", "restaurant_catalog.csv"),
+    ("clearview_optical_vsp.csv", "optometry_catalog.csv"),
 ]
 
 
@@ -61,7 +62,6 @@ def run() -> int:
         results = match_invoice(invoice, catalog)
 
         n = len(results)
-        matched = results["sc_sku"].notna().sum()
         auto = (results["status"] == "AUTO-ACCEPT").sum()
         review = results["status"].isin(["REVIEW-SUGGESTED", "FORCE-REVIEW"]).sum()
         nomatch = (results["status"] == "NO-MATCH").sum()

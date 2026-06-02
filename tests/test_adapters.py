@@ -34,6 +34,7 @@ ADAPTER_CASES = [
     ("Vetcove", "sample_clinic_vetcove.csv", 10),
     ("Ferguson", "comfort_pro_ferguson.csv", 25),
     ("Sysco", "bistro_24_sysco.csv", 25),
+    ("VSP/Essilor", "clearview_optical_vsp.csv", 25),
 ]
 
 
@@ -64,7 +65,7 @@ def test_adapter_parses_sample(sample_dir: Path, adapter_name: str, sample_file:
 
 def test_adapters_registry_contains_known():
     """The adapter registry should contain all four verticals' adapters."""
-    expected = {"Benco", "Henry Schein", "Darby", "Base86", "Patterson", "Vetcove", "Ferguson", "Sysco"}
+    expected = {"Benco", "Henry Schein", "Darby", "Base86", "Patterson", "Vetcove", "Ferguson", "Sysco", "VSP/Essilor"}
     assert expected.issubset(set(ADAPTERS.keys())), f"Missing adapters: {expected - set(ADAPTERS.keys())}"
 
 
@@ -73,7 +74,7 @@ def test_adapter_vertical_mapping_complete():
     from engine.adapters import ADAPTER_VERTICAL
     for name in ADAPTERS:
         assert name in ADAPTER_VERTICAL, f"{name} missing from ADAPTER_VERTICAL"
-    assert set(ADAPTER_VERTICAL.values()) <= {"dental", "vet", "hvac", "restaurant"}
+    assert set(ADAPTER_VERTICAL.values()) <= {"dental", "vet", "hvac", "restaurant", "optometry"}
 
 
 @pytest.mark.parametrize("supplier_file,catalog_file,vertical", [
@@ -81,6 +82,7 @@ def test_adapter_vertical_mapping_complete():
     ("bistro_24_sysco.csv", "restaurant_catalog.csv", "restaurant"),
     ("sample_clinic_vetcove.csv", "vet_catalog.csv", "vet"),
     ("auburn_dental_benco.csv", "sourceclub_catalog.csv", "dental"),
+    ("clearview_optical_vsp.csv", "optometry_catalog.csv", "optometry"),
 ])
 def test_vertical_end_to_end_produces_savings(sample_dir: Path, supplier_file, catalog_file, vertical):
     """Each vertical should parse + match + find some savings (proves generalization)."""

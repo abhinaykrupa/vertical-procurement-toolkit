@@ -19,6 +19,8 @@ def detect(file_bytes: bytes, filename: str) -> str:
         return "Ferguson"
     if "sysco" in filename_lower or "sys_" in filename_lower:
         return "Sysco"
+    if "vsp" in filename_lower or "essilor" in filename_lower:
+        return "VSP/Essilor"
 
     try:
         header = file_bytes[:2000].decode("utf-8", errors="ignore").lower()
@@ -38,6 +40,8 @@ def detect(file_bytes: bytes, filename: str) -> str:
             return "Ferguson"
         if "sysco" in header:
             return "Sysco"
+        if "vsp" in header or "essilor" in header:
+            return "VSP/Essilor"
     except Exception:
         pass
 

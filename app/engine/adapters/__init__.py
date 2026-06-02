@@ -1,4 +1,4 @@
-from . import benco, henry_schein, base86, darby, patterson, vetcove, ferguson, sysco, auto_detect
+from . import benco, henry_schein, base86, darby, patterson, vetcove, ferguson, sysco, vsp, auto_detect
 
 ADAPTERS = {
     # Dental
@@ -13,6 +13,8 @@ ADAPTERS = {
     "Ferguson": ferguson.parse,
     # Restaurant / foodservice
     "Sysco": sysco.parse,
+    # Optometry
+    "VSP/Essilor": vsp.parse,
 }
 
 # Which vertical each adapter belongs to — used to auto-load the right UOM table.
@@ -25,4 +27,5 @@ ADAPTER_VERTICAL = {
     "Vetcove": "vet",
     "Ferguson": "hvac",
     "Sysco": "restaurant",
+    "VSP/Essilor": "optometry",
 }
