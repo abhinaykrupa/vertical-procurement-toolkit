@@ -32,6 +32,8 @@ ADAPTER_CASES = [
     ("Base86", "auburn_dental_base86.csv", 5),
     ("Patterson", "harbor_view_patterson_messy.csv", 5),
     ("Vetcove", "sample_clinic_vetcove.csv", 10),
+    ("Ferguson", "comfort_pro_ferguson.csv", 25),
+    ("Sysco", "bistro_24_sysco.csv", 25),
 ]
 
 
@@ -61,6 +63,41 @@ def test_adapter_parses_sample(sample_dir: Path, adapter_name: str, sample_file:
 
 
 def test_adapters_registry_contains_known():
-    """The adapter registry should at minimum contain the dental + vet adapters."""
-    expected = {"Benco", "Henry Schein", "Darby", "Base86", "Patterson", "Vetcove"}
+    """The adapter registry should contain all four verticals' adapters."""
+    expected = {"Benco", "Henry Schein", "Darby", "Base86", "Patterson", "Vetcove", "Ferguson", "Sysco"}
     assert expected.issubset(set(ADAPTERS.keys())), f"Missing adapters: {expected - set(ADAPTERS.keys())}"
+
+
+def test_adapter_vertical_mapping_complete():
+    """Every adapter should map to a known vertical (so UOM tables auto-load)."""
+    from engine.adapters import ADAPTER_VERTICAL
+    for name in ADAPTERS:
+        assert name in ADAPTER_VERTICAL, f"{name} missing from ADAPTER_VERTICAL"
+    assert set(ADAPTER_VERTICAL.values()) <= {"dental", "vet", "hvac", "restaurant"}
+
+
+@pytest.mark.parametrize("supplier_file,catalog_file,vertical", [
+    ("comfort_pro_ferguson.csv", "hvac_catalog.csv", "hvac"),
+    ("bistro_24_sysco.csv", "restaurant_catalog.csv", "restaurant"),
+    ("sample_clinic_vetcove.csv", "vet_catalog.csv", "vet"),
+    ("auburn_dental_benco.csv", "sourceclub_catalog.csv", "dental"),
+])
+def test_vertical_end_to_end_produces_savings(sample_dir: Path, supplier_file, catalog_file, vertical):
+    """Each vertical should parse + match + find some savings (proves generalization)."""
+    from engine.matcher import match_invoice
+    from engine.adapters import auto_detect
+
+    file_bytes = (sample_dir / supplier_file).read_bytes()
+    adapter_name = auto_detect.detect(file_bytes, supplier_file)
+    assert adapter_name != "Unknown", f"auto-detect failed for {supplier_file}"
+
+    invoice = ADAPTERS[adapter_name](file_bytes, supplier_file)
+    catalog = pd.read_csv(sample_dir / catalog_file)
+    results = match_invoice(invoice, catalog)
+
+    assert len(results) == len(invoice)
+    # At least half the lines should match (these samples are built to match the catalog)
+    matched = results["sc_sku"].notna().sum()
+    assert matched >= len(results) * 0.5, f"{vertical}: only {matched}/{len(results)} matched"
+    total_savings = results["total_savings"].fillna(0).sum()
+    assert total_savings > 0, f"{vertical}: no savings found"

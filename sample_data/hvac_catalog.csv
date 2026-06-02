@@ -1,0 +1,31 @@
+sc_sku,description,manufacturer,mfg_sku,category,unit_of_measure,pack_size,unit_price
+HV-REF-410A-25,R-410A Refrigerant 25lb Cylinder,Honeywell,R410A-25,Refrigerant,Cylinder,25,165.00
+HV-REF-32-10,R-32 Refrigerant 10lb Cylinder,Daikin,R32-10,Refrigerant,Cylinder,10,98.00
+HV-REF-22-30,R-22 Refrigerant 30lb Cylinder,Chemours,R22-30,Refrigerant,Cylinder,30,420.00
+HV-CAP-35-5,Run Capacitor 35/5 MFD 440V Dual,Mars,12035,Capacitors,Each,1,12.50
+HV-CAP-45-5,Run Capacitor 45/5 MFD 440V Dual,Mars,12045,Capacitors,Each,1,14.00
+HV-CAP-START-189,Start Capacitor 189-227 MFD 330V,Mars,12203,Capacitors,Each,1,9.50
+HV-CONT-2P-30,Contactor 2-Pole 30 Amp 24V Coil,Packard,C230B,Contactors,Each,1,18.00
+HV-CONT-1P-30,Contactor 1-Pole 30 Amp 24V Coil,Packard,C130A,Contactors,Each,1,15.00
+HV-MOT-CONDFAN-13,Condenser Fan Motor 1/3 HP 825 RPM,Genteq,3905,Motors,Each,1,138.00
+HV-MOT-BLOWER-12,Blower Motor 1/2 HP 1075 RPM 4-Speed,US Motors,1860,Motors,Each,1,185.00
+HV-THERM-PROG7,7-Day Programmable Thermostat,Honeywell,TH8320,Thermostats,Each,1,98.00
+HV-THERM-SMART,Smart WiFi Thermostat,Ecobee,EB-STATE5,Thermostats,Each,1,189.00
+HV-FILT-MERV8-20,Pleated Air Filter MERV 8 20x25x1,Filtrete,FPL08,Filters,Case,12,42.00
+HV-FILT-MERV11-16,Pleated Air Filter MERV 11 16x25x1,Filtrete,FPL11,Filters,Case,12,58.00
+HV-DUCT-FLEX-25,Insulated Flex Duct R8 8in x 25ft,Atco,FLEX-R8-8,Ductwork,Box,1,68.00
+HV-DUCT-TAPE-FOIL,Foil Duct Tape UL181 2.5in x 60yd,Nashua,322,Ductwork,Roll,1,14.50
+HV-DUCT-METAL-6,Galvanized Round Pipe 6in x 5ft 26ga,Imperial,GV0605,Ductwork,Each,1,9.00
+HV-LINESET-3458,Copper Lineset 3/8 x 5/8 x 50ft,Mueller,LS3858-50,Linesets,Each,1,225.00
+HV-PVC-CON-34,PVC Condensate Pipe 3/4in x 10ft,Charlotte,PVC0710,Plumbing,Each,1,6.50
+HV-PUMP-COND-120,Condensate Pump 120V 1/30 HP,Little Giant,VCMA-20,Plumbing,Each,1,68.00
+HV-COIL-EVAP-25,Evaporator Coil Cased 2.5 Ton,Goodman,CAPF3030,Coils,Each,1,420.00
+HV-COIL-CLEANER-1,Evaporator Coil Cleaner 1 Gallon,Nu-Calgon,4168-08,Chemicals,Gallon,1,28.00
+HV-NITRO-CYL,Nitrogen Cylinder 40cf Disposable,Thermadyne,NITRO-40,Gases,Cylinder,1,72.00
+HV-BRAZE-15,Silver Braze Rod 15% 1lb Tube,Harris,15SAF1,Brazing,Tube,1,42.00
+HV-WIRE-1865,Thermostat Wire 18/8 Solid 250ft,Southwire,55188102,Electrical,Roll,1,68.00
+HV-WHIP-6,A/C Disconnect Whip 6ft 10/3,Diversitech,WHP10-6,Electrical,Each,1,18.50
+HV-PAD-COND-3636,Condenser Pad 36x36x3 Plastic,Diversitech,UC3636-3,Pads,Each,1,38.00
+HV-UV-LIGHT-24,UV-C Air Purifier Light 24V,Fresh-Aire,APCO-X,Air Quality,Each,1,225.00
+HV-IGNITER-HSI,Hot Surface Igniter Universal,White-Rodgers,767A-372,Ignition,Each,1,34.00
+HV-FLAME-SENSOR,Flame Sensor Universal Rod,Supco,FS123,Ignition,Each,1,11.00

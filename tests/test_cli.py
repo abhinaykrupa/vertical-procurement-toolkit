@@ -59,3 +59,33 @@ def test_cli_analyze_end_to_end(project_root, tmp_path):
     assert "line_items" in data
     assert data["summary"]["adapter"] == "Benco"
     assert data["summary"]["total_lines"] > 0
+
+
+def test_cli_analyze_hvac_vertical(project_root, tmp_path):
+    out_path = tmp_path / "hvac.json"
+    code, _, stderr = _run_cli(
+        "analyze",
+        "-s", "sample_data/comfort_pro_ferguson.csv",
+        "-c", "sample_data/hvac_catalog.csv",
+        "-o", str(out_path),
+        cwd=project_root,
+    )
+    assert code == 0, f"CLI failed: {stderr}"
+    data = json.loads(out_path.read_text())
+    assert data["summary"]["adapter"] == "Ferguson"
+    assert data["summary"]["total_savings"] > 0
+
+
+def test_cli_validate_good_catalog(project_root):
+    code, out, _ = _run_cli("validate", "-c", "sample_data/restaurant_catalog.csv", cwd=project_root)
+    assert code == 0
+    assert "valid" in out.lower()
+
+
+def test_cli_validate_detects_bad_catalog(project_root, tmp_path):
+    bad = tmp_path / "bad.csv"
+    bad.write_text("sc_sku,description,unit_price\nX-1,A,5.00\nX-1,B,notanum\n,C,3.00\n")
+    code, out, _ = _run_cli("validate", "-c", str(bad), cwd=project_root)
+    assert code == 1
+    assert "duplicate" in out.lower()
+    assert "non-numeric" in out.lower()

@@ -59,6 +59,21 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     if args.verbose:
         print(f"using adapter: {adapter_name}", file=sys.stderr)
 
+    # Load the right UOM vocabulary for this vertical (auto from adapter, or --vertical override)
+    vertical = args.vertical
+    if vertical is None:
+        from engine.adapters import ADAPTER_VERTICAL
+        vertical = ADAPTER_VERTICAL.get(adapter_name)
+    if vertical:
+        try:
+            from .uom import apply_to_engine
+            apply_to_engine(vertical)
+            if args.verbose:
+                print(f"loaded UOM table: {vertical}", file=sys.stderr)
+        except FileNotFoundError:
+            if args.verbose:
+                print(f"no UOM table for vertical {vertical!r}, using defaults", file=sys.stderr)
+
     # Parse
     if adapter_name == "generic":
         from .generic_adapter import parse_generic
@@ -115,6 +130,69 @@ def cmd_adapters(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_validate(args: argparse.Namespace) -> int:
+    """Validate a catalog CSV: required columns, numeric prices, no duplicate SKUs."""
+    import pandas as pd
+
+    catalog_path = Path(args.catalog)
+    if not catalog_path.exists():
+        print(f"error: catalog file not found: {catalog_path}", file=sys.stderr)
+        return 2
+
+    try:
+        df = pd.read_csv(catalog_path)
+    except Exception as e:
+        print(f"FAIL: could not read CSV: {e}", file=sys.stderr)
+        return 1
+
+    problems: list[str] = []
+    warnings: list[str] = []
+
+    required = ["sc_sku", "description", "unit_price"]
+    recommended = ["manufacturer", "mfg_sku", "unit_of_measure", "pack_size"]
+
+    for col in required:
+        if col not in df.columns:
+            problems.append(f"missing required column: {col!r}")
+
+    for col in recommended:
+        if col not in df.columns:
+            warnings.append(f"missing recommended column: {col!r} (matching quality will be lower)")
+
+    if "sc_sku" in df.columns:
+        dupes = df["sc_sku"][df["sc_sku"].duplicated()].unique()
+        if len(dupes):
+            problems.append(f"{len(dupes)} duplicate sc_sku value(s): {list(dupes)[:5]}")
+        n_blank = df["sc_sku"].isna().sum()
+        if n_blank:
+            problems.append(f"{n_blank} row(s) with blank sc_sku")
+
+    if "unit_price" in df.columns:
+        prices = pd.to_numeric(
+            df["unit_price"].astype(str).str.replace("$", "", regex=False).str.replace(",", "", regex=False),
+            errors="coerce",
+        )
+        n_bad = prices.isna().sum()
+        if n_bad:
+            problems.append(f"{n_bad} row(s) with non-numeric unit_price")
+        n_zero = (prices == 0).sum()
+        if n_zero:
+            warnings.append(f"{n_zero} row(s) with unit_price == 0")
+
+    print(f"Catalog: {catalog_path}")
+    print(f"Rows: {len(df)}  Columns: {len(df.columns)}")
+    for w in warnings:
+        print(f"  WARN  {w}")
+    for p in problems:
+        print(f"  FAIL  {p}")
+
+    if problems:
+        print(f"\n{len(problems)} problem(s) found.", file=sys.stderr)
+        return 1
+    print("\nOK — catalog is valid." + (f" ({len(warnings)} warning(s))" if warnings else ""))
+    return 0
+
+
 def cmd_detect(args: argparse.Namespace) -> int:
     supplier_path = Path(args.supplier_file)
     if not supplier_path.exists():
@@ -159,6 +237,11 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="K=V",
         help="Column mapping for generic adapter, e.g. supplier_sku=ItemNum raw_description=Name",
     )
+    p_an.add_argument(
+        "--vertical",
+        default=None,
+        help="UOM vocabulary to load (dental/vet/hvac/restaurant). Default: inferred from adapter.",
+    )
     p_an.add_argument("-o", "--output", help="Write JSON to file instead of stdout")
     p_an.add_argument("--pretty", action="store_true", help="Pretty-print JSON output")
     p_an.add_argument("-v", "--verbose", action="store_true", help="Verbose logs to stderr")
@@ -172,6 +255,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_dt = sub.add_parser("detect", help="Auto-detect the supplier of a file")
     p_dt.add_argument("-s", "--supplier-file", required=True)
     p_dt.set_defaults(func=cmd_detect)
+
+    # validate
+    p_va = sub.add_parser("validate", help="Validate a catalog CSV")
+    p_va.add_argument("-c", "--catalog", required=True, help="Path to catalog CSV to validate")
+    p_va.set_defaults(func=cmd_validate)
 
     return parser
 

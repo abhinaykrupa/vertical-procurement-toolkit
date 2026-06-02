@@ -175,18 +175,31 @@ The dashboard logic itself is generic. Most edits are string swaps.
 
 ---
 
-## Examples worth contributing
+## Worked examples already in the repo
 
-Highest-value adapters to add (open issues if you want a starter task):
+Four verticals ship as working references. Copy whichever is closest to your target:
+
+| Vertical | Adapter (in `app/engine/adapters/`) | Catalog | Sample export |
+|---|---|---|---|
+| 🦷 Dental | `benco.py` + 4 others | `sourceclub_catalog.csv` | `auburn_dental_benco.csv` etc. |
+| 🐾 Vet | `vetcove.py` | `vet_catalog.csv` | `sample_clinic_vetcove.csv` |
+| 🔧 HVAC | `ferguson.py` | `hvac_catalog.csv` | `comfort_pro_ferguson.csv` |
+| 🍽️ Restaurant | `sysco.py` | `restaurant_catalog.csv` | `bistro_24_sysco.csv` |
+
+`ferguson.py` shows the cleanest minimal adapter. `sysco.py` shows handling foodservice pack-size chaos. `patterson.py` shows handling truly messy real-world exports. `vetcove.py` shows aggregating multiple distributors in one export.
+
+## More adapters worth contributing
+
+Highest-value adapters still open (open issues if you want a starter task):
 
 | Vertical | Top suppliers to adapt | Estimated time |
 |---|---|---|
-| Vet | Patterson Vet, Covetrus, MWI, Henry Schein Vet | 4–6 hours per adapter |
-| HVAC | Ferguson, Carrier, Trane, Lennox, R.E. Michel | 4–6 hours per adapter |
-| Restaurant | Sysco, US Foods, PFG, Restaurant Depot | 4–6 hours per adapter |
-| Auto repair | NAPA, AutoZone Commercial, O'Reilly Pro, WorldPac | 4–6 hours per adapter |
-| Independent pharmacy | McKesson, Cardinal, Cencora (AmerisourceBergen) | 4–6 hours per adapter |
-| Optometry | VSP, Essilor, Hoya, Marchon | 4–6 hours per adapter |
+| Vet | Patterson Vet, Covetrus, MWI as *standalone* adapters | 4–6 hours each |
+| HVAC | Carrier, Trane, Lennox, R.E. Michel | 4–6 hours each |
+| Restaurant | US Foods, PFG, Restaurant Depot | 4–6 hours each |
+| Auto repair | NAPA, AutoZone Commercial, O'Reilly Pro, WorldPac | 4–6 hours each |
+| Independent pharmacy | McKesson, Cardinal, Cencora (AmerisourceBergen) | 4–6 hours each |
+| Optometry | VSP, Essilor, Hoya, Marchon | 4–6 hours each |
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the contribution process.
 

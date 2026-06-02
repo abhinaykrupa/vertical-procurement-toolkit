@@ -5,6 +5,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This project f
 
 ## [Unreleased]
 
+### Added (later in v0.2 cycle)
+- **HVAC vertical** (closes #3): Ferguson adapter, 30-SKU HVAC catalog (refrigerant, capacitors, motors, ductwork, coils, ignition), sample export. End-to-end: 30 lines, $10.4K savings, 1 deliberate catalog gap.
+- **Restaurant vertical** (closes #2): Sysco adapter (handles foodservice pack-size conventions like "6/#10 CAN", "5 GAL PAIL", quoted-comma totals), 30-SKU foodservice catalog, sample export. End-to-end: 30 lines, $8.2K savings.
+- `vpt validate` CLI command — checks catalog for required columns, numeric prices, duplicate/blank SKUs; exits non-zero on problems
+- `--vertical` CLI flag + automatic UOM-table loading per adapter (`ADAPTER_VERTICAL` map) — the matcher now loads the correct vertical vocabulary automatically
+- `.pre-commit-config.yaml` — ruff + whitespace/EOF/yaml/large-file hooks
+- Test suite expanded to 50 tests: new adapters, per-vertical end-to-end savings assertions, validate command, adapter→vertical mapping completeness
+
 ### Added
 - `vpt/` Python package — clean public API: `from vpt import match_invoice, load_catalog, get_adapter`
 - CLI: `vpt analyze`, `vpt adapters`, `vpt detect`, `vpt --version` (via `python -m vpt.cli` or installed entrypoint)

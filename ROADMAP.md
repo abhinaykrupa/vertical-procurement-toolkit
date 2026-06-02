@@ -10,9 +10,10 @@ Shipped:
 - ✅ CLI (`vpt analyze`, `vpt detect`, `vpt adapters`)
 - ✅ Generic CSV adapter (no per-supplier code needed)
 - ✅ Real LLM-backed Stage 3 (Anthropic + OpenAI) with mock fallback
-- ✅ Per-vertical UOM tables (YAML) — dental, vet, HVAC, restaurant
-- ✅ Vet vertical example (Vetcove adapter + 30-SKU catalog + sample data)
-- ✅ Pytest suite (40 tests) + GitHub Actions CI (Py 3.10/3.11/3.12)
+- ✅ Per-vertical UOM tables (YAML) — dental, vet, HVAC, restaurant, auto-loaded per adapter
+- ✅ **Four working vertical examples** — dental, vet (Vetcove), HVAC (Ferguson), restaurant (Sysco)
+- ✅ `vpt validate` command for catalog QA
+- ✅ Pytest suite (50 tests) + GitHub Actions CI (Py 3.10/3.11/3.12) + ruff + pre-commit
 - ✅ Standard OSS hygiene — pyproject.toml, SECURITY.md, PR/issue templates, CHANGELOG, ROADMAP
 
 ## Next (v0.3 — community-driven)

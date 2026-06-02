@@ -13,7 +13,16 @@
 
 Small businesses in dental, veterinary, optometry, HVAC, auto repair, independent restaurants, and similar verticals all face the same problem: they buy from 3–7 different distributors, every distributor uses different SKUs, different descriptions, different pack sizes, different units of measure — and nobody has time to compare line-by-line whether they're overpaying.
 
-This repo is the engine that does that comparison automatically. It was originally built as a case study for a dental Group Purchasing Organization, but the architecture is vertical-agnostic — swap the catalog and add a supplier adapter, and the same engine works for veterinary, HVAC, or any fragmented-supplier vertical.
+This repo is the engine that does that comparison automatically. It was originally built as a case study for a dental Group Purchasing Organization, but the architecture is vertical-agnostic — swap the catalog and add a supplier adapter, and the same engine works for any fragmented-supplier vertical.
+
+**Four verticals ship with working examples today** — same engine, zero matcher changes:
+
+| Vertical | Adapter | Sample export | Result on bundled sample |
+|---|---|---|---|
+| 🦷 Dental | Benco, Henry Schein, Darby, Base86, Patterson | 5 files | match + savings report |
+| 🐾 Veterinary | Vetcove (multi-distributor) | 1 file | 30 lines · $14.2K spend · **$1.9K savings** |
+| 🔧 HVAC | Ferguson | 1 file | 30 lines · $64.8K spend · **$10.4K savings** · 1 catalog gap |
+| 🍽️ Restaurant | Sysco | 1 file | 30 lines · $74.8K spend · **$8.2K savings** |
 
 **Live demo (dental example):** https://sourceclub-poc.streamlit.app/
 
@@ -57,6 +66,8 @@ app/
       base86.py
       patterson.py              Handles deliberately messy real-world export
       vetcove.py                Veterinary — multi-distributor order history
+      ferguson.py               HVAC — Ferguson supply export
+      sysco.py                  Restaurant — Sysco foodservice export
       auto_detect.py            Supplier auto-detection
   sync/                         Mock Stripe ↔ HubSpot billing rollup (multi-location example)
 
@@ -66,7 +77,9 @@ uom_tables/                     Per-vertical UOM vocabulary (YAML)
 sample_data/
   sourceclub_catalog.csv        Dental reference catalog
   vet_catalog.csv               Veterinary reference catalog (~30 SKUs)
-  *_<supplier>.csv              Sample supplier exports (dental + vet)
+  hvac_catalog.csv              HVAC reference catalog (~30 SKUs)
+  restaurant_catalog.csv        Restaurant/foodservice reference catalog (~30 SKUs)
+  *_<supplier>.csv              Sample supplier exports (4 verticals)
 
 tests/                          Pytest suite — 40 tests
 .github/workflows/ci.yml        GitHub Actions CI (3.10 / 3.11 / 3.12)

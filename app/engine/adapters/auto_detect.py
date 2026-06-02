@@ -15,6 +15,10 @@ def detect(file_bytes: bytes, filename: str) -> str:
         return "Patterson"
     if "vetcove" in filename_lower or "vc_" in filename_lower:
         return "Vetcove"
+    if "ferguson" in filename_lower or "frg" in filename_lower:
+        return "Ferguson"
+    if "sysco" in filename_lower or "sys_" in filename_lower:
+        return "Sysco"
 
     try:
         header = file_bytes[:2000].decode("utf-8", errors="ignore").lower()
@@ -30,6 +34,10 @@ def detect(file_bytes: bytes, filename: str) -> str:
             return "Patterson"
         if "vetcove" in header:
             return "Vetcove"
+        if "ferguson" in header:
+            return "Ferguson"
+        if "sysco" in header:
+            return "Sysco"
     except Exception:
         pass
 

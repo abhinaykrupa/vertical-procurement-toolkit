@@ -1,0 +1,31 @@
+sc_sku,description,manufacturer,mfg_sku,category,unit_of_measure,pack_size,unit_price
+RS-OIL-CANOLA-35,Canola Oil 35lb Jug,Stratas,CAN-35,Oils & Shortenings,Jug,1,38.00
+RS-OIL-OLIVE-3,Extra Virgin Olive Oil 3L Tin,Pompeian,EVOO-3L,Oils & Shortenings,Tin,1,32.00
+RS-FLOUR-AP-50,All-Purpose Flour 50lb Bag,General Mills,GM-AP-50,Dry Goods,Bag,1,22.00
+RS-SUGAR-GRAN-50,Granulated Sugar 50lb Bag,Domino,DOM-GR-50,Dry Goods,Bag,1,38.00
+RS-RICE-LG-25,Long Grain Rice 25lb Bag,Riceland,RL-LG-25,Dry Goods,Bag,1,18.00
+RS-PASTA-PENNE-20,Penne Pasta 20lb Case,Barilla,BAR-PEN-20,Dry Goods,Case,1,24.00
+RS-TOM-CRUSH-6,Crushed Tomatoes #10 Can 6-Pack,Stanislaus,STAN-CR-6,Canned Goods,Case,6,32.00
+RS-TOM-PASTE-6,Tomato Paste #10 Can 6-Pack,Stanislaus,STAN-PST-6,Canned Goods,Case,6,38.00
+RS-BEANS-BLACK-6,Black Beans #10 Can 6-Pack,Bush,BSH-BLK-6,Canned Goods,Case,6,28.00
+RS-CHKN-BREAST-40,Chicken Breast Boneless 40lb Case,Tyson,TY-CB-40,Proteins,Case,1,118.00
+RS-BEEF-GROUND-40,Ground Beef 80/20 40lb Case,Cargill,CAR-GB-40,Proteins,Case,1,156.00
+RS-PORK-LOIN-30,Pork Loin Boneless 30lb Case,Smithfield,SM-PL-30,Proteins,Case,1,98.00
+RS-SHRIMP-2125-5,Shrimp 21-25 ct 5lb Bag,Sea Best,SB-SH-5,Seafood,Bag,1,68.00
+RS-SALMON-FIL-10,Salmon Fillet 10lb Case,Trident,TR-SAL-10,Seafood,Case,1,142.00
+RS-CHEESE-MOZ-30,Mozzarella Shredded 30lb Case,Galbani,GAL-MOZ-30,Dairy,Case,1,98.00
+RS-CHEESE-CHED-20,Cheddar Block 20lb Case,Tillamook,TIL-CHED-20,Dairy,Case,1,82.00
+RS-BUTTER-30,Butter Solids 30lb Case,Land O Lakes,LOL-BT-30,Dairy,Case,1,118.00
+RS-EGGS-LG-15,Large Eggs 15 Dozen Case,Cal-Maine,CM-LG-15,Dairy,Case,15,42.00
+RS-MILK-WHOLE-4,Whole Milk 1 Gallon 4-Pack,Borden,BOR-WM-4,Dairy,Case,4,16.00
+RS-LETTUCE-ROM-24,Romaine Lettuce 24 Count Case,Taylor Farms,TF-ROM-24,Produce,Case,24,28.00
+RS-TOM-ROMA-25,Roma Tomatoes 25lb Case,Fresh Point,FP-TOM-25,Produce,Case,1,24.00
+RS-ONION-YEL-50,Yellow Onions 50lb Bag,Gills,GIL-ON-50,Produce,Bag,1,22.00
+RS-POTATO-RUS-50,Russet Potatoes 50lb Bag,Idaho,ID-POT-50,Produce,Bag,1,28.00
+RS-OIL-FRYER-35,Fryer Shortening 35lb Cube,Stratas,SHT-35,Oils & Shortenings,Cube,1,42.00
+RS-NAPKIN-DIN-3000,Dinner Napkins 3000 Count Case,Georgia-Pacific,GP-NAP-3000,Disposables,Case,3000,38.00
+RS-CUP-16OZ-1000,Paper Cup 16oz 1000 Count Case,Dart,DART-16-1000,Disposables,Case,1000,52.00
+RS-GLOVE-NIT-1000,Nitrile Gloves Powder-Free 1000ct,AMMEX,AMX-NIT-1000,Disposables,Case,1000,68.00
+RS-FOIL-18-1,Aluminum Foil 18in x 1000ft Roll,Reynolds,REY-18-1000,Disposables,Roll,1,42.00
+RS-CLEAN-DEGREASE-4,Degreaser Concentrate 1 Gal 4-Pack,Ecolab,ECO-DG-4,Cleaning,Case,4,58.00
+RS-SANITIZER-5,Sanitizer Solution 5 Gallon Pail,Ecolab,ECO-SAN-5,Cleaning,Pail,1,48.00
