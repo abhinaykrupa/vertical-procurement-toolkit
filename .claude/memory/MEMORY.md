@@ -1,0 +1,3 @@
+- Live Streamlit demo URL: https://vertical-procurement-toolkit.streamlit.app/
+- GitHub repo: https://github.com/abhinaykrupa/vertical-procurement-toolkit
+- Local path: /Users/ag/vertical-procurement-toolkit

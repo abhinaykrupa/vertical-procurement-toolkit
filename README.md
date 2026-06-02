@@ -25,7 +25,7 @@ This repo is the engine that does that comparison automatically. It was original
 | 🍽️ Restaurant | Sysco | 1 file | 30 lines · $74.8K spend · **$8.2K savings** |
 | 👓 Optometry | VSP/Essilor | 1 file | 30 lines · $98.8K spend · **$12.3K savings** · 1 catalog gap |
 
-**Live demo (all 5 verticals):** `https://vertical-procurement-toolkit.streamlit.app` ← deploy instructions below
+**Live demo (all 5 verticals):** https://vertical-procurement-toolkit.streamlit.app
 
 ## Try it in 30 seconds
 
