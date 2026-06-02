@@ -6,6 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This project f
 ## [Unreleased]
 
 ### Added (later in v0.2 cycle)
+- **Optional embedding-based Stage-2 retrieval** (`vpt/retrieval.py`): sentence-transformers (all-MiniLM-L6-v2) behind `STAGE2_RETRIEVAL=embeddings`. Drop-in replacement for the difflib retriever; falls back gracefully when the package is absent so the zero-dep demo never breaks. `[embeddings]` extra in pyproject.
 - **Optometry vertical** (5th vertical): VSP/Essilor adapter, 30-SKU catalog (contacts, lenses, frames, coatings, solutions, drops, diagnostics), sample export, uom_tables/optometry.yaml. End-to-end: 30 lines, $98.8K spend, $12.3K savings, 1 catalog gap.
 - **Multi-supplier comparison** (`vpt compare`, `vpt/compare.py`): given the same vertical's purchase history from multiple distributors, finds the cheapest supplier per item and total potential savings — the cross-distributor value prop single-vendor clubs can't offer.
 - **Benchmark script** (`scripts/benchmark.py`): honest per-vertical match-rate table across all bundled samples; surfaced in the README.

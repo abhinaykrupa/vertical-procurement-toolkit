@@ -48,6 +48,9 @@ llm = [
     "anthropic>=0.30",
     "openai>=1.30",
 ]
+embeddings = [
+    "sentence-transformers>=2.2",
+]
 dev = [
     "pytest>=7.4",
     "pytest-cov>=4.1",

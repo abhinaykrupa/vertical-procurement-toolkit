@@ -183,6 +183,16 @@ export ANTHROPIC_API_KEY=sk-...
 # Engine now uses Claude for ambiguous matches; mock is used when keys absent.
 ```
 
+Real embeddings for Stage 2 (optional):
+
+```bash
+pip install sentence-transformers
+export STAGE2_RETRIEVAL=embeddings
+# Stage 2 now retrieves candidates by semantic similarity (all-MiniLM-L6-v2)
+# instead of difflib. Falls back to difflib automatically if the package is
+# absent, so the zero-dep demo never breaks.
+```
+
 ## Adapt it to your vertical
 
 The bundled example is dental supply (Benco, Henry Schein, Darby, Base86, Patterson). To run it against vet supply (Patterson Vet, Covetrus, MWI), HVAC (Ferguson, Carrier, Trane), restaurant supply (Sysco, US Foods, PFG), or any other vertical:
