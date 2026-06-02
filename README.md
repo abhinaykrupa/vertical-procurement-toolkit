@@ -193,6 +193,20 @@ The repo is a runnable reference architecture, not production code. For a produc
 
 ---
 
+## Documentation
+
+| Doc | What |
+|---|---|
+| [examples/quickstart.md](./examples/quickstart.md) | Copy-pasteable CLI / Python API / generic-adapter walkthroughs |
+| [ADAPTING.md](./ADAPTING.md) | Adapt this toolkit to your vertical (~30 min walkthrough) |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | How to contribute (new adapters, verticals, fixes) |
+| [ROADMAP.md](./ROADMAP.md) | What's planned, what's accepted, what's out of scope |
+| [CHANGELOG.md](./CHANGELOG.md) | Versioned changes |
+| [SECURITY.md](./SECURITY.md) | Vulnerability disclosure policy |
+| [SECURITY_REVIEW.md](./SECURITY_REVIEW.md) | POC-vs-production security gap analysis |
+| [PRODUCTION_ARCHITECTURE.md](./PRODUCTION_ARCHITECTURE.md) | Production deployment guidance (pgvector, real LLM, auth, audit log) |
+| [case-study/](./case-study/) | Original SourceClub case-study deliverables (origin story) |
+
 ## Contributing
 
 This repo is meant to grow. The fastest contributions:
