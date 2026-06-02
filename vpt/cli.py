@@ -130,6 +130,53 @@ def cmd_adapters(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_compare(args: argparse.Namespace) -> int:
+    """Compare prices for the same items across multiple supplier files."""
+    from .compare import compare_suppliers, comparison_summary
+
+    catalog_path = Path(args.catalog)
+    if not catalog_path.exists():
+        print(f"error: catalog file not found: {catalog_path}", file=sys.stderr)
+        return 2
+
+    supplier_files = []
+    for sf in args.supplier_files:
+        p = Path(sf)
+        if not p.exists():
+            print(f"error: supplier file not found: {p}", file=sys.stderr)
+            return 2
+        file_bytes = p.read_bytes()
+        adapter_name = auto_detect.detect(file_bytes, p.name)
+        if adapter_name == "Unknown":
+            print(f"error: could not auto-detect supplier for {p.name}", file=sys.stderr)
+            return 3
+        supplier_files.append((adapter_name, file_bytes, p.name))
+
+    catalog = load_catalog(catalog_path)
+    comparison = compare_suppliers(supplier_files, catalog)
+
+    if comparison.empty:
+        print("No overlapping items found across the supplied files.", file=sys.stderr)
+        return 0
+
+    summary = comparison_summary(comparison)
+
+    if args.json:
+        output = {"summary": summary, "items": comparison.to_dict(orient="records")}
+        print(json.dumps(output, default=str, indent=2 if args.pretty else None))
+    else:
+        print(f"Compared {summary['items_compared']} items across {len(supplier_files)} suppliers.")
+        print(f"Items carried by >1 supplier: {summary['multi_supplier_items']}")
+        print(f"Total potential savings (always buy cheapest): ${summary['total_potential_savings']:,.2f}")
+        if summary.get("biggest_spread_item"):
+            print(f"Biggest price spread: {summary['biggest_spread_item']} (${summary['biggest_spread']:,.2f})")
+        print()
+        cols = ["sc_description", "cheapest_supplier", "cheapest_price", "price_spread", "suppliers_carrying"]
+        print(comparison[cols].head(args.top).to_string(index=False))
+
+    return 0
+
+
 def cmd_validate(args: argparse.Namespace) -> int:
     """Validate a catalog CSV: required columns, numeric prices, no duplicate SKUs."""
     import pandas as pd
@@ -260,6 +307,15 @@ def build_parser() -> argparse.ArgumentParser:
     p_va = sub.add_parser("validate", help="Validate a catalog CSV")
     p_va.add_argument("-c", "--catalog", required=True, help="Path to catalog CSV to validate")
     p_va.set_defaults(func=cmd_validate)
+
+    # compare
+    p_cmp = sub.add_parser("compare", help="Compare prices for the same items across multiple supplier files")
+    p_cmp.add_argument("-s", "--supplier-files", required=True, nargs="+", help="Two or more supplier files")
+    p_cmp.add_argument("-c", "--catalog", required=True, help="Reference catalog CSV")
+    p_cmp.add_argument("--json", action="store_true", help="Output JSON instead of a table")
+    p_cmp.add_argument("--pretty", action="store_true", help="Pretty-print JSON (with --json)")
+    p_cmp.add_argument("--top", type=int, default=20, help="Rows to show in table output (default 20)")
+    p_cmp.set_defaults(func=cmd_compare)
 
     return parser
 

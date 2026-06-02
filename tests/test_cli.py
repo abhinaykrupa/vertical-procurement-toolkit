@@ -89,3 +89,14 @@ def test_cli_validate_detects_bad_catalog(project_root, tmp_path):
     assert code == 1
     assert "duplicate" in out.lower()
     assert "non-numeric" in out.lower()
+
+
+def test_cli_compare_two_suppliers(project_root):
+    code, out, stderr = _run_cli(
+        "compare",
+        "-s", "sample_data/auburn_dental_benco.csv", "sample_data/auburn_dental_henry_schein.csv",
+        "-c", "sample_data/sourceclub_catalog.csv",
+        cwd=project_root,
+    )
+    assert code == 0, f"CLI failed: {stderr}"
+    assert "potential savings" in out.lower()
