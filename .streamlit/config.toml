@@ -1,0 +1,17 @@
+[theme]
+# Modern healthcare-fintech palette — teal-blue + sage green
+# In-app toggle (top-right) overrides this for the page surface.
+# Default = dark; toggle for light mode.
+primaryColor = "#14B8A6"
+backgroundColor = "#0B1220"
+secondaryBackgroundColor = "#111A2C"
+textColor = "#E2E8F0"
+font = "sans serif"
+base = "dark"
+
+[server]
+headless = true
+runOnSave = true
+
+[browser]
+gatherUsageStats = false
