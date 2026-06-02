@@ -53,11 +53,11 @@ def _styles():
     }
 
 
-def _brand_header():
-    """Returns a Table representing the SourceClub header band."""
+def _brand_header(org_name: str = "Procurement Toolkit", vertical: str = "Group Purchasing"):
+    """Returns a Table representing the GPO header band."""
     cell = Paragraph(
-        '<font name="Helvetica-Bold" color="#FFFFFF" size="16">SourceClub</font>'
-        '<font color="#FFFFFF" size="11">  ·  Dental Group Purchasing</font>',
+        f'<font name="Helvetica-Bold" color="#FFFFFF" size="16">{org_name}</font>'
+        f'<font color="#FFFFFF" size="11">  ·  {vertical}</font>',
         getSampleStyleSheet()["Normal"]
     )
     t = Table([[cell]], colWidths=[7.0 * inch])
@@ -82,7 +82,7 @@ def _kpi_row(total_spend, projected_spend, total_savings, savings_pct, styles):
 
     data = [[
         cell("Current Annual Spend",   f"${total_spend:,.0f}",       "metric_value"),
-        cell("With SourceClub",        f"${projected_spend:,.0f}",   "metric_value"),
+        cell("Negotiated Pricing",     f"${projected_spend:,.0f}",   "metric_value"),
         cell("Estimated Savings",      f"${total_savings:,.0f}",     "metric_value_green"),
     ]]
 
@@ -122,8 +122,8 @@ def generate_savings_pdf(results_df, customer_name: str, supplier_name: str, per
         buf, pagesize=LETTER,
         leftMargin=0.6 * inch, rightMargin=0.6 * inch,
         topMargin=0.6 * inch, bottomMargin=0.5 * inch,
-        title="SourceClub Savings Analysis",
-        author="SourceClub",
+        title="Supplier Savings Analysis",
+        author="Vertical Procurement Toolkit",
     )
     s = _styles()
 
@@ -148,7 +148,7 @@ def generate_savings_pdf(results_df, customer_name: str, supplier_name: str, per
     story = []
 
     # ---- Header ----
-    story.append(_brand_header())
+    story.append(_brand_header(supplier_name, "Supplier Savings Analysis"))
     story.append(Spacer(1, 24))
 
     # ---- Cover content ----
@@ -179,24 +179,24 @@ def generate_savings_pdf(results_df, customer_name: str, supplier_name: str, per
     story.append(Paragraph("The opportunity", s["h2"]))
     story.append(Paragraph(
         f"Based on {len(results_df)} line items from your {supplier_name} purchase history, "
-        f"SourceClub identified <b>${total_savings:,.0f} in annual savings</b> "
+        f"This analysis identified <b>${total_savings:,.0f} in annual savings</b> "
         f"({savings_pct:.1f}% of your current ${total_spend:,.0f} supply budget). "
         f"This is on the same product mix you're buying today — same manufacturers, "
-        f"same pack sizes — just at SourceClub negotiated pricing.",
+        f"same pack sizes — just at negotiated pricing.",
         s["body"]
     ))
     story.append(Spacer(1, 6))
     story.append(Paragraph(
         f"<b>{n_auto}</b> items matched automatically via SKU. "
         f"<b>{n_review}</b> items flagged for analyst review (typically UOM or pack-size verification). "
-        f"<b>{n_nomatch}</b> items have no SourceClub equivalent yet — these are catalog-gap "
-        f"opportunities we add to our quarterly supplier negotiations.",
+        f"<b>{n_nomatch}</b> items have no catalog equivalent yet — these are catalog-gap "
+        f"opportunities to add to quarterly supplier negotiations.",
         s["body"]
     ))
 
     # ---- Page 2: line-item detail ----
     story.append(PageBreak())
-    story.append(_brand_header())
+    story.append(_brand_header(supplier_name, "Supplier Savings Analysis"))
     story.append(Spacer(1, 18))
 
     story.append(Paragraph("Top 15 line items by savings", s["h2"]))
@@ -250,8 +250,8 @@ def generate_savings_pdf(results_df, customer_name: str, supplier_name: str, per
         story.append(Spacer(1, 18))
         story.append(Paragraph("Items not currently in our catalog", s["h2"]))
         story.append(Paragraph(
-            f"These {len(no_match)} items don't yet have a SourceClub equivalent. "
-            f"We track these as 'catalog gap' opportunities and prioritize them in "
+            f"These {len(no_match)} items don't yet have a catalog equivalent. "
+            f"These are catalog-gap opportunities to prioritize in "
             f"quarterly supplier negotiations.",
             s["small"]
         ))
@@ -284,7 +284,7 @@ def generate_savings_pdf(results_df, customer_name: str, supplier_name: str, per
         "through a 3-stage matching engine: exact SKU match, semantic description match, "
         "and LLM adjudication for ambiguous cases. Unit-of-measure and pack-size are "
         "verified independently. Low-confidence matches and pack-size mismatches are "
-        "routed to a SourceClub analyst for human review before this report is sent. "
+        "routed to a human analyst for review before this report is sent. "
         "Full per-line audit trail is available on request.",
         s["small"]
     ))

@@ -1,5 +1,5 @@
 """
-Leadership Dashboard — the first view a SourceClub exec opens.
+Leadership Dashboard — procurement analytics overview for GPO operators.
 
 Three persona-targeted sections on one page:
   • CEO view: pipeline health, savings delivered, throughput
@@ -273,9 +273,9 @@ def render():
 
 > A {win['locations']}-location {win['specialty'].lower()} dental group in {win['state']} was spending
 > approximately **\\${win['annual_supply_spend']:,}/year** on supplies across multiple distributors.
-> After a SourceClub savings analysis, we identified **\\${win['outcome_savings']:,} in annual savings**
+> After a savings analysis, we identified **\\${win['outcome_savings']:,} in annual savings**
 > ({win['savings_pct']}% reduction on the exact same product mix).
-> They joined SourceClub on **{win['sa_date']}** — annualized MRR contribution: **\\${win['outcome_mrr']:,}/mo**.
+> They joined on **{win['sa_date']}** — annualized MRR contribution: **\\${win['outcome_mrr']:,}/mo**.
 
 *Source: {win['source']} · Rep: {win['rep']}*
                 """)

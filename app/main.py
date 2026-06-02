@@ -385,7 +385,7 @@ st.markdown(f"""
 <div class="sc-hero-row">
 {SC_LOGO_SVG}
 <div class="sc-hero-text">
-<div class="sc-wordmark">SourceClub</div>
+<div class="sc-wordmark">Procurement Toolkit</div>
 <div class="sc-subtitle">Operations Platform · Case Study POC</div>
 </div>
 <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
@@ -590,7 +590,7 @@ Upload → Auto-detect Supplier → Supplier Adapter → Canonical Schema
             st.download_button(
                 "📄 Generate Branded PDF Report",
                 data=pdf_bytes,
-                file_name=f"sourceclub_savings_report_{st.session_state['last_customer'].replace(' ', '_')}.pdf",
+                file_name=f"savings_report_{st.session_state['last_customer'].replace(' ', '_')}.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
@@ -708,7 +708,7 @@ Upload → Auto-detect Supplier → Supplier Adapter → Canonical Schema
         if len(no_match) > 0:
             with st.expander(f"🔴 No Match — Catalog gap opportunities ({len(no_match)})"):
                 st.caption(
-                    "These items have no equivalent in the SourceClub catalog. "
+                    "These items have no equivalent in the catalog. "
                     "Production system feeds these into a 'catalog gap' list for procurement."
                 )
                 st.dataframe(
@@ -877,14 +877,14 @@ with tab_roadmap:
     st.subheader("💡 What's missing from the queue — my proposals")
     st.markdown(
         "The existing queue is solid for the obvious wins. These are higher-leverage additions "
-        "that come from thinking about SourceClub's flywheel — every member buys monthly, and "
+        "that come from thinking about a GPO flywheel — every member buys monthly, and "
         "every prospect needs a savings analysis. That's two engines that get faster with automation."
     )
 
     st.caption(
         "**Sizing context:** estimates calibrated to ~500 members, ~$2.5M ARR, 4–7 employees. "
-        "SourceClub makes flat membership fees — not a % of supplier GMV — so I separate "
-        "*SourceClub revenue impact* from *member value delivered* (which drives retention indirectly)."
+        "This model assumes flat membership fees — not a % of supplier GMV — so GPO revenue impact "
+        "is separated from *member value delivered* (which drives retention indirectly)."
     )
 
     proposed = pd.DataFrame([
@@ -919,7 +919,7 @@ with tab_roadmap:
         {"ID": "NEW-8", "Proposed Project": "Smart Order Routing",
          "Category": "Member Value", "Effort": "4 weeks", "Impact": "★★★☆☆",
          "Annual $ Impact": "+$30K retained ARR",
-         "Mechanism": "Member-value play. Drives retention + referrals. Not direct margin to SourceClub."},
+         "Mechanism": "Member-value play. Drives retention + referrals. Not direct margin to the GPO."},
         {"ID": "NEW-9", "Proposed Project": "Internal AI Knowledge Search",
          "Category": "Team Velocity", "Effort": "1–2 weeks", "Impact": "★★★★☆",
          "Annual $ Impact": "+$60K (FTE-equivalent)",
@@ -961,6 +961,5 @@ st.caption(
     "POC built as case-study deliverable · Mocked LLM calls (production uses Claude Haiku/Sonnet) · "
     "Mocked Stripe/HubSpot data (production reads live APIs) · "
     "Sample practices, pipeline data, and per-location pricing ($299/mo) are illustrative — "
-    "SourceClub does not publicly disclose pricing · "
-    "All dollar impact estimates calibrated to ~500 members / ~$2.5M ARR — see SUBMISSION.md and STRATEGIC_ADDENDUM.md for the full reasoning"
+    "All dollar impact estimates are illustrative, calibrated to a ~500-member / ~$2.5M ARR GPO — adjust to your own numbers"
 )

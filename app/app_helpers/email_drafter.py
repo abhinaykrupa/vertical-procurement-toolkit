@@ -8,7 +8,7 @@ structurally and tonally what the real model would return.
 
 
 PRODUCTION_PROMPT_TEMPLATE = """
-You are a SourceClub sales rep drafting a personalized follow-up email after
+You are a sales rep drafting a personalized follow-up email after
 delivering a savings analysis to {practice_name}, a {locations}-location {specialty}
 practice in {state}.
 
@@ -22,7 +22,7 @@ Draft a 4-paragraph email with:
 - Greeting that references the practice's specialty
 - One concrete "did you know" insight tied to their savings
 - Soft CTA suggesting a 15-minute call
-- Tone: confident but not pushy. SOURCE CLUB style: short paragraphs, direct.
+- Tone: confident but not pushy. Short paragraphs, direct.
 
 Return JSON: {{ "subject": ..., "body": ... }}
 """.strip()
@@ -89,7 +89,7 @@ def draft_outreach_email(prospect: dict) -> dict:
 
 Wanted to circle back on the savings analysis we put together for {practice} last week.
 
-The short version: we identified **${savings:,} in annual savings** ({pct}% off your current ${spend:,} supply budget), driven mostly by {cats_phrase}. That's on the exact same product mix you're buying today — same manufacturers, same pack sizes — just at SourceClub negotiated pricing.
+The short version: we identified **${savings:,} in annual savings** ({pct}% off your current ${spend:,} supply budget), driven mostly by {cats_phrase}. That's on the exact same product mix you're buying today — same manufacturers, same pack sizes — just at our negotiated pricing.
 
 One thing that stood out for {location_phrase}: you're carrying meaningful spend on {specialty_hook}, which is exactly where our negotiated rates run deepest. {social_proof}
 
@@ -99,7 +99,6 @@ Happy to send the full audit report ahead of the call if that helps.
 
 Best,
 {rep}
-SourceClub
 """
 
     return {"subject": subject, "body": body}
