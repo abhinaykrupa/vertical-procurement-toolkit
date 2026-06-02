@@ -131,6 +131,23 @@ Opens at `http://localhost:8501`. Pick any sample file from the dropdown to see 
 
 ---
 
+## Honest match rates
+
+Run `python scripts/benchmark.py` to reproduce. Real numbers on the bundled samples:
+
+| Vertical | Adapter | Lines | Auto% | Review% | No-match% | Savings found |
+|---|---|---|---|---|---|---|
+| Dental | Benco | 34 | 94% | 0% | 6% | $5,119 (41%) |
+| Dental | Henry Schein | 38 | 92% | 0% | 8% | $3,927 (50%) |
+| Dental | Darby | 26 | 50% | 42% | 8% | $4,312 (46%) |
+| Dental | Base86 | 28 | 11% | 64% | 25% | $4,783 (37%) |
+| Dental | Patterson (messy) | 25 | 8% | 48% | 44% | $2,752 (23%) |
+| Vet | Vetcove | 30 | 100% | 0% | 0% | $1,868 (13%) |
+| HVAC | Ferguson | 30 | 97% | 0% | 3% | $10,411 (16%) |
+| Restaurant | Sysco | 30 | 100% | 0% | 0% | $8,171 (11%) |
+
+The spread is the point. Files with clean manufacturer SKUs (Benco, Vetcove) auto-accept at 90-100%. Files with no mfg SKUs and messy formatting (Patterson) drop to 8% auto-accept and 44% no-match — and that's **correct behavior**, not failure. The no-match bucket feeds catalog-gap analysis, and the review queue catches the ambiguous middle. Human-in-the-loop is the spec.
+
 ## Use it programmatically or via CLI
 
 ```python
