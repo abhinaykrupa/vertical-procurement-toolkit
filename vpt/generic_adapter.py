@@ -29,7 +29,6 @@ If a target column is missing from the source, the adapter:
 from __future__ import annotations
 
 import io
-from typing import Optional
 
 import pandas as pd
 

@@ -1,0 +1,42 @@
+name: Bug report
+description: Something doesn't work the way it should
+title: "[bug] "
+labels: [bug, needs-triage]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug. What did you do, what did you expect, what actually occurred?
+      placeholder: |
+        Steps:
+        1. Ran `vpt analyze -s ... -c ...`
+        2. Expected ...
+        3. Got ...
+    validations:
+      required: true
+  - type: textarea
+    id: minimal-repro
+    attributes:
+      label: Minimal reproduction
+      description: |
+        Smallest code/data needed to reproduce. Paste the command and a redacted snippet of the input file if relevant.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Python version, OS, package version, how you installed.
+      placeholder: |
+        - Python: 3.11.6
+        - OS: macOS 14.4
+        - vpt version: 0.2.0 (from main @ <commit>)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / stack trace
+      render: shell

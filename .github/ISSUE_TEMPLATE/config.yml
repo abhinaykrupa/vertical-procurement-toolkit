@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question / discussion
+    url: https://github.com/abhinaykrupa/vertical-procurement-toolkit/discussions
+    about: For open-ended questions or design discussions, please use Discussions.
+  - name: Security vulnerability
+    url: https://github.com/abhinaykrupa/vertical-procurement-toolkit/security/advisories/new
+    about: Report security issues privately. Do NOT open a public issue for vulnerabilities.

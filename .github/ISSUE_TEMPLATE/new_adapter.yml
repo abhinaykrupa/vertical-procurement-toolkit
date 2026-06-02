@@ -1,0 +1,44 @@
+name: New supplier adapter
+description: Request or propose a new supplier adapter
+title: "[adapter] "
+labels: [adapter, help wanted]
+body:
+  - type: input
+    id: supplier
+    attributes:
+      label: Supplier name
+      placeholder: e.g. Patterson Vet, Sysco, Ferguson HVAC
+    validations:
+      required: true
+  - type: input
+    id: vertical
+    attributes:
+      label: Vertical
+      placeholder: e.g. veterinary, restaurant, HVAC, auto repair
+    validations:
+      required: true
+  - type: textarea
+    id: format
+    attributes:
+      label: Export format
+      description: |
+        What does their export look like? CSV/XLSX/PDF? How many header rows? Column names?
+        Paste a redacted sample if you can.
+    validations:
+      required: true
+  - type: textarea
+    id: quirks
+    attributes:
+      label: Known quirks
+      description: |
+        Anything unusual — $-prefixed prices, embedded commas, mixed UOM, footer rows, multi-tab Excel, etc.
+  - type: dropdown
+    id: contributing
+    attributes:
+      label: Are you planning to contribute the adapter yourself?
+      options:
+        - "Yes — I'll open a PR"
+        - "Maybe — I'd need help"
+        - "No — just requesting"
+    validations:
+      required: true

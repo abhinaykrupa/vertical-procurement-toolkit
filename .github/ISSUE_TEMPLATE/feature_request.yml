@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest a new feature or improvement
+title: "[feature] "
+labels: [enhancement, needs-triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem does this solve? What's broken or missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would you build it? What's the API / UX?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you thought about and rejected.
+  - type: dropdown
+    id: contributing
+    attributes:
+      label: Would you be willing to implement this?
+      options:
+        - "Yes"
+        - "Maybe — I'd need guidance"
+        - "No"
+    validations:
+      required: true
