@@ -64,7 +64,7 @@ vpt = "vpt.cli:main"
 Homepage = "https://github.com/abhinaykrupa/vertical-procurement-toolkit"
 Repository = "https://github.com/abhinaykrupa/vertical-procurement-toolkit"
 Issues = "https://github.com/abhinaykrupa/vertical-procurement-toolkit/issues"
-Demo = "https://sourceclub-poc.streamlit.app/"
+Demo = "https://vertical-procurement-toolkit.streamlit.app/"
 
 [tool.setuptools.packages.find]
 where = ["."]

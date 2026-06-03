@@ -16,7 +16,7 @@ This guide walks you through adapting it to a new vertical. Total time: **30–6
 
 ## Step 1 — Swap the catalog
 
-Replace `sample_data/sourceclub_catalog.csv` with your vertical's catalog. Match the column structure:
+Replace `sample_data/dental_catalog.csv` with your vertical's catalog. Match the column structure:
 
 ```csv
 sc_sku,description,manufacturer,unit_price,pack_size,uom
@@ -181,7 +181,7 @@ Four verticals ship as working references. Copy whichever is closest to your tar
 
 | Vertical | Adapter (in `app/engine/adapters/`) | Catalog | Sample export |
 |---|---|---|---|
-| 🦷 Dental | `benco.py` + 4 others | `sourceclub_catalog.csv` | `auburn_dental_benco.csv` etc. |
+| 🦷 Dental | `benco.py` + 4 others | `dental_catalog.csv` | `auburn_dental_benco.csv` etc. |
 | 🐾 Vet | `vetcove.py` | `vet_catalog.csv` | `sample_clinic_vetcove.csv` |
 | 🔧 HVAC | `ferguson.py` | `hvac_catalog.csv` | `comfort_pro_ferguson.csv` |
 | 🍽️ Restaurant | `sysco.py` | `restaurant_catalog.csv` | `bistro_24_sysco.csv` |

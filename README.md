@@ -7,7 +7,7 @@
 [![CI](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Live Demo](https://img.shields.io/badge/demo-streamlit-ff4b4b)](https://sourceclub-poc.streamlit.app/)
+[![Live Demo](https://img.shields.io/badge/demo-streamlit-ff4b4b)](https://vertical-procurement-toolkit.streamlit.app/)
 
 **An open-source reference architecture for automating supplier-invoice savings analysis in fragmented-supplier industries.**
 
@@ -77,13 +77,14 @@ uom_tables/                     Per-vertical UOM vocabulary (YAML)
   dental.yaml, vet.yaml, hvac.yaml, restaurant.yaml, optometry.yaml
 
 sample_data/
-  sourceclub_catalog.csv        Dental reference catalog
+  dental_catalog.csv            Dental reference catalog (~40 SKUs)
   vet_catalog.csv               Veterinary reference catalog (~30 SKUs)
   hvac_catalog.csv              HVAC reference catalog (~30 SKUs)
   restaurant_catalog.csv        Restaurant/foodservice reference catalog (~30 SKUs)
-  *_<supplier>.csv              Sample supplier exports (4 verticals)
+  optometry_catalog.csv         Optometry reference catalog (~30 SKUs)
+  *_<supplier>.csv              Sample supplier exports (5 verticals, 11 files)
 
-tests/                          Pytest suite — 40 tests
+tests/                          Pytest suite — 60 tests
 .github/workflows/ci.yml        GitHub Actions CI (3.10 / 3.11 / 3.12)
 ADAPTING.md                     ← Read this to adapt to your vertical
 CONTRIBUTING.md                 How to contribute (new adapters, verticals, fixes)
