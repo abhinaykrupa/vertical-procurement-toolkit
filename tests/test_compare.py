@@ -10,7 +10,7 @@ from vpt.compare import compare_suppliers, comparison_summary
 def test_compare_finds_overlapping_items(sample_dir):
     from engine.adapters import ADAPTERS
 
-    catalog = pd.read_csv(sample_dir / "sourceclub_catalog.csv")
+    catalog = pd.read_csv(sample_dir / "dental_catalog.csv")
     supplier_files = [
         ("Benco", (sample_dir / "auburn_dental_benco.csv").read_bytes(), "benco.csv"),
         ("Henry Schein", (sample_dir / "auburn_dental_henry_schein.csv").read_bytes(), "hs.csv"),
@@ -34,7 +34,7 @@ def test_compare_finds_overlapping_items(sample_dir):
 def test_compare_summary_rollup(sample_dir):
     from engine.adapters import ADAPTERS
 
-    catalog = pd.read_csv(sample_dir / "sourceclub_catalog.csv")
+    catalog = pd.read_csv(sample_dir / "dental_catalog.csv")
     supplier_files = [
         ("Benco", (sample_dir / "auburn_dental_benco.csv").read_bytes(), "benco.csv"),
         ("Henry Schein", (sample_dir / "auburn_dental_henry_schein.csv").read_bytes(), "hs.csv"),

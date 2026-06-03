@@ -9,7 +9,7 @@ Usage:
 
 Examples:
     # Run a savings analysis end-to-end, output JSON to stdout
-    vpt analyze -s sample_data/auburn_dental_benco.csv -c sample_data/sourceclub_catalog.csv
+    vpt analyze -s sample_data/auburn_dental_benco.csv -c sample_data/dental_catalog.csv
 
     # Use a specific adapter (skip auto-detect)
     vpt analyze -s invoice.csv -c catalog.csv --adapter Benco

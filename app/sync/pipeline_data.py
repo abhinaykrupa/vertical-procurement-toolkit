@@ -11,9 +11,9 @@ import random
 # Deterministic so the dashboard looks identical each run
 random.seed(42)
 
-REPS = ["Jake P.", "Sarah M.", "Maria L."]
+REPS = ["Alex R.", "Sam K.", "Maria L."]
 SOURCES = ["Inbound — Web", "Outbound", "Referral", "Conference", "Partner"]
-SPECIALTIES = ["General", "Pediatric", "Ortho", "Endo", "Perio", "Oral Surgery", "Cosmetic"]
+SPECIALTIES = ["General", "Pediatric", "Specialty", "Multi-Location", "Independent", "Group Practice", "Enterprise"]
 STATES = ["CA", "TX", "NY", "FL", "IL", "OH", "PA", "GA", "WA", "MA", "AZ", "CO"]
 
 STAGES = [
@@ -41,21 +41,21 @@ STAGE_DISTRIBUTION = [
 
 
 _PRACTICE_NAMES = [
-    "Auburn Dental Group", "Demit Dental", "Quincy Smiles", "Bright Smiles Dental",
-    "Coastal Family Dentistry", "Heritage Dental Associates", "Lakeside Smiles",
-    "Premier Dental Care", "Sunset Dental Group", "Mountain View Dental",
-    "Riverside Family Dental", "Oakwood Dental Arts", "Cedar Park Dentistry",
-    "Willow Creek Dental", "Pine Valley Smiles", "Maple Street Dental",
-    "Aspen Dental Studio", "Cypress Dental Group", "Magnolia Family Dentistry",
-    "Bayview Dental Associates", "Hilltop Smiles", "Greenway Dental",
-    "Crescent Dental Care", "Highland Park Dentistry", "Westshore Dental Group",
-    "Sunnyside Pediatric Dental", "Briarcliff Family Dental", "Eastlake Smiles",
-    "Crossroads Dental", "Parkside Dental Studio", "Beacon Hill Dentistry",
-    "Foxhollow Dental", "Stonebridge Family Dental", "Larkspur Smiles",
-    "Meridian Dental Group", "Northshore Dental Arts", "Trailhead Family Dentistry",
-    "Vista Dental Associates", "Whispering Pines Dental", "Brookside Smiles",
-    "Copper Ridge Dentistry", "Driftwood Dental", "Emerald Bay Dental Studio",
-    "Falcon Crest Dental", "Glenwood Family Dental",
+    "Apex Practice Group", "Meridian Partners", "Quincy Health Group", "Bright Path Clinic",
+    "Coastal Family Practice", "Heritage Associates", "Lakeside Care",
+    "Premier Care Group", "Sunset Practice Group", "Mountain View Health",
+    "Riverside Family Practice", "Oakwood Care Partners", "Cedar Park Clinic",
+    "Willow Creek Health", "Pine Valley Group", "Maple Street Practice",
+    "Aspen Health Studio", "Cypress Care Group", "Magnolia Family Practice",
+    "Bayview Associates", "Hilltop Health Group", "Greenway Care",
+    "Crescent Health Care", "Highland Park Practice", "Westshore Group",
+    "Sunnyside Pediatric Care", "Briarcliff Family Practice", "Eastlake Health",
+    "Crossroads Care Group", "Parkside Practice Studio", "Beacon Hill Health",
+    "Foxhollow Care", "Stonebridge Family Practice", "Larkspur Health",
+    "Meridian Health Group", "Northshore Care Partners", "Trailhead Family Practice",
+    "Vista Associates", "Whispering Pines Health", "Brookside Care Group",
+    "Copper Ridge Practice", "Driftwood Health", "Emerald Bay Health Studio",
+    "Falcon Crest Care", "Glenwood Family Practice",
 ]
 
 

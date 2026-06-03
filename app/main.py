@@ -4,7 +4,7 @@ Vertical Procurement Toolkit — Streamlit reference app.
 Open-source reference architecture for automating supplier-invoice savings
 analysis in fragmented-supplier industries (dental, vet, HVAC, restaurant, auto, etc.).
 
-The bundled example is dental supply (built originally as a SourceClub case study).
+The bundled example is dental supply (the original reference vertical).
 See ADAPTING.md for how to swap in your own vertical.
 
 Four tabs:
@@ -46,7 +46,7 @@ SAMPLE_DIR = ROOT / "sample_data"
 
 # Per-vertical catalog mapping
 VERTICAL_CATALOGS = {
-    "dental":     "sourceclub_catalog.csv",
+    "dental":     "dental_catalog.csv",
     "vet":        "vet_catalog.csv",
     "hvac":       "hvac_catalog.csv",
     "restaurant": "restaurant_catalog.csv",
@@ -54,7 +54,7 @@ VERTICAL_CATALOGS = {
 }
 
 # Default fallback
-CATALOG_PATH = SAMPLE_DIR / "sourceclub_catalog.csv"
+CATALOG_PATH = SAMPLE_DIR / "dental_catalog.csv"
 
 # ---------- Theme state ----------
 if "theme" not in st.session_state:
@@ -354,7 +354,7 @@ st.markdown(css, unsafe_allow_html=True)
 
 @st.cache_data
 def load_catalog(vertical: str = "dental") -> pd.DataFrame:
-    catalog_file = VERTICAL_CATALOGS.get(vertical, "sourceclub_catalog.csv")
+    catalog_file = VERTICAL_CATALOGS.get(vertical, "dental_catalog.csv")
     return pd.read_csv(SAMPLE_DIR / catalog_file)
 
 
@@ -400,8 +400,8 @@ st.markdown(f"""
 tab_dash, tab_sa, tab_sync, tab_roadmap = st.tabs([
     "  📊  Leadership Dashboard  ",
     "  🔍  Savings Analysis  ",
-    "  🔗  Stripe ↔ HubSpot Sync  ",
-    "  🗺️  90-Day Roadmap  ",
+    "  🔗  Billing Sync Demo  ",
+    "  🗺️  GPO Roadmap Example  ",
 ])
 
 # ============================================================
@@ -603,7 +603,7 @@ Upload → Auto-detect Supplier → Supplier Adapter → Canonical Schema
                     "locations": 1,  # POC default; production reads from HubSpot
                     "specialty": "general",
                     "state": "CA",
-                    "rep": "Jake P.",
+                    "rep": "Alex R.",
                     "annual_supply_spend": int(total_spend),
                     "identified_savings": int(total_savings),
                     "savings_pct": round(savings_pct, 1),
@@ -731,7 +731,8 @@ Upload → Auto-detect Supplier → Supplier Adapter → Canonical Schema
 # ============================================================
 
 with tab_sync:
-    st.header("Stripe ↔ HubSpot Sync — Multi-Location Data Spine")
+    st.info("💡 **Demo context:** This tab shows a generic multi-location GPO billing sync — mock data only. In production, replace `app/sync/mock_data.py` with live Stripe + HubSpot API calls. See [PRODUCTION_ARCHITECTURE.md](https://github.com/abhinaykrupa/vertical-procurement-toolkit/blob/main/PRODUCTION_ARCHITECTURE.md) for the full design.", icon=None)
+    st.header("Billing Sync — Multi-Location Data Spine")
     st.markdown(
         "**The problem:** Stripe bills per location (subscription) but HubSpot tracks the parent company. "
         "Native integrations dump billing data onto Deals or Invoices — not the Company record — and can't "
@@ -844,7 +845,8 @@ Building it once here pays off three more times downstream.
 # ============================================================
 
 with tab_roadmap:
-    st.header("90-Day Roadmap — Prioritized Project Queue")
+    st.info("💡 **Demo context:** This roadmap was originally designed for a dental GPO. The project categories (savings analysis automation, billing sync, CS tooling, data integrations) apply to any GPO vertical — substitute your own supplier names, tools, and dollar estimates.", icon=None)
+    st.header("GPO Roadmap — Prioritized Project Queue (Dental Example)")
     st.markdown(
         "Sequencing for the first 90 days in the seat. I prioritize by **dependencies and "
         "revenue leverage**, not just urgency. The first three projects unblock the rest."

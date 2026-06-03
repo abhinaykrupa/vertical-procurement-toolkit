@@ -30,12 +30,12 @@ SAMPLE_DIR = PROJECT_ROOT / "sample_data"
 
 # (sample_file, catalog_file)
 CASES = [
-    ("auburn_dental_benco.csv", "sourceclub_catalog.csv"),
-    ("demit_dental_henry_schein.csv", "sourceclub_catalog.csv"),
-    ("quincy_smiles_darby.csv", "sourceclub_catalog.csv"),
-    ("auburn_dental_base86.csv", "sourceclub_catalog.csv"),
-    ("harbor_view_patterson_messy.csv", "sourceclub_catalog.csv"),
-    ("auburn_dental_henry_schein.csv", "sourceclub_catalog.csv"),
+    ("auburn_dental_benco.csv", "dental_catalog.csv"),
+    ("demit_dental_henry_schein.csv", "dental_catalog.csv"),
+    ("quincy_smiles_darby.csv", "dental_catalog.csv"),
+    ("auburn_dental_base86.csv", "dental_catalog.csv"),
+    ("harbor_view_patterson_messy.csv", "dental_catalog.csv"),
+    ("auburn_dental_henry_schein.csv", "dental_catalog.csv"),
     ("sample_clinic_vetcove.csv", "vet_catalog.csv"),
     ("comfort_pro_ferguson.csv", "hvac_catalog.csv"),
     ("bistro_24_sysco.csv", "restaurant_catalog.csv"),

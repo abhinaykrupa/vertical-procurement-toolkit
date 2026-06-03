@@ -5,7 +5,7 @@ Import the engine, run a match programmatically, or use the CLI:
 
     from vpt import match_invoice, load_catalog, get_adapter
     df = get_adapter("Benco")(open("file.csv", "rb").read(), "file.csv")
-    results = match_invoice(df, load_catalog("sample_data/sourceclub_catalog.csv"))
+    results = match_invoice(df, load_catalog("sample_data/dental_catalog.csv"))
 
 Or use the CLI:
 

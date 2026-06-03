@@ -81,7 +81,7 @@ def test_adapter_vertical_mapping_complete():
     ("comfort_pro_ferguson.csv", "hvac_catalog.csv", "hvac"),
     ("bistro_24_sysco.csv", "restaurant_catalog.csv", "restaurant"),
     ("sample_clinic_vetcove.csv", "vet_catalog.csv", "vet"),
-    ("auburn_dental_benco.csv", "sourceclub_catalog.csv", "dental"),
+    ("auburn_dental_benco.csv", "dental_catalog.csv", "dental"),
     ("clearview_optical_vsp.csv", "optometry_catalog.csv", "optometry"),
 ])
 def test_vertical_end_to_end_produces_savings(sample_dir: Path, supplier_file, catalog_file, vertical):

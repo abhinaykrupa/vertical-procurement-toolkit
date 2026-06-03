@@ -48,7 +48,7 @@ def test_cli_analyze_end_to_end(project_root, tmp_path):
     code, _, stderr = _run_cli(
         "analyze",
         "-s", "sample_data/auburn_dental_benco.csv",
-        "-c", "sample_data/sourceclub_catalog.csv",
+        "-c", "sample_data/dental_catalog.csv",
         "-o", str(out_path),
         cwd=project_root,
     )
@@ -95,7 +95,7 @@ def test_cli_compare_two_suppliers(project_root):
     code, out, stderr = _run_cli(
         "compare",
         "-s", "sample_data/auburn_dental_benco.csv", "sample_data/auburn_dental_henry_schein.csv",
-        "-c", "sample_data/sourceclub_catalog.csv",
+        "-c", "sample_data/dental_catalog.csv",
         cwd=project_root,
     )
     assert code == 0, f"CLI failed: {stderr}"

@@ -77,7 +77,7 @@ def test_match_invoice_end_to_end(sample_dir, project_root):
     """Smoke test: parse one supplier file and run match_invoice end-to-end."""
     from engine.adapters import ADAPTERS
 
-    catalog = pd.read_csv(sample_dir / "sourceclub_catalog.csv")
+    catalog = pd.read_csv(sample_dir / "dental_catalog.csv")
     parse = ADAPTERS["Benco"]
     invoice = parse((sample_dir / "auburn_dental_benco.csv").read_bytes(), "auburn_dental_benco.csv")
     results = match_invoice(invoice, catalog)

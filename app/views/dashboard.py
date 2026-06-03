@@ -271,7 +271,7 @@ def render():
                 st.markdown(f"""
 **Anonymized case-study draft:**
 
-> A {win['locations']}-location {win['specialty'].lower()} dental group in {win['state']} was spending
+> A {win['locations']}-location {win['specialty'].lower()} practice group in {win['state']} was spending
 > approximately **\\${win['annual_supply_spend']:,}/year** on supplies across multiple distributors.
 > After a savings analysis, we identified **\\${win['outcome_savings']:,} in annual savings**
 > ({win['savings_pct']}% reduction on the exact same product mix).
