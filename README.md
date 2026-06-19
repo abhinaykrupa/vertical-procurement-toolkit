@@ -1,11 +1,17 @@
 # Vertical Procurement Toolkit
-<p align="center">
-  <img src="./docs/hero.svg" alt="Vertical Procurement Toolkit architecture" width="100%"/>
-</p>
+
 [![CI](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Live Demo](https://img.shields.io/badge/demo-streamlit-ff4b4b)](https://vertical-procurement-toolkit.streamlit.app/)
+
+<p align="center">
+  <img src="./docs/screenshots/demo-home.png" alt="Procurement Toolkit — Leadership Dashboard" width="100%"/>
+</p>
+
+<p align="center">
+  <img src="./docs/screenshots/demo-savings.png" alt="Procurement Toolkit — Savings Analysis Pipeline" width="100%"/>
+</p>
 **An open-source reference architecture for automating supplier-invoice savings analysis in fragmented-supplier industries.**
 Small businesses in dental, veterinary, optometry, HVAC, auto repair, independent restaurants, and similar verticals all face the same problem: they buy from 3–7 different distributors, every distributor uses different SKUs, different descriptions, different pack sizes, different units of measure — and nobody has time to compare line-by-line whether they're overpaying.
 This repo is the engine that does that comparison automatically. It was originally built as a case study for a dental Group Purchasing Organization, but the architecture is vertical-agnostic — swap the catalog and add a supplier adapter, and the same engine works for any fragmented-supplier vertical.
