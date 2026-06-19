@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="./docs/screenshots/demo-savings.png" alt="Procurement Toolkit — Savings Analysis Pipeline" width="100%"/>
+  <img src="./docs/pipeline-animation.svg" alt="3-Stage Matching Pipeline Architecture" width="100%"/>
 </p>
 **An open-source reference architecture for automating supplier-invoice savings analysis in fragmented-supplier industries.**
 Small businesses in dental, veterinary, optometry, HVAC, auto repair, independent restaurants, and similar verticals all face the same problem: they buy from 3–7 different distributors, every distributor uses different SKUs, different descriptions, different pack sizes, different units of measure — and nobody has time to compare line-by-line whether they're overpaying.

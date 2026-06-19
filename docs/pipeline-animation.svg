@@ -1,0 +1,114 @@
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" role="img" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; border-radius: 12px;">
+  <title>3-Stage Procurement Matching Pipeline</title>
+  <desc>Animated diagram showing how supplier invoices flow through deterministic, semantic, and LLM judge stages to produce a savings report</desc>
+
+  <!-- Background -->
+  <rect width="900" height="340" fill="#0d1117" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" fill="#e6edf3" font-size="15" font-weight="600">3-Stage Supplier Invoice Matching Pipeline</text>
+  <text x="450" y="50" text-anchor="middle" fill="#7d8590" font-size="11">Same engine · 5 verticals · dental · vet · HVAC · restaurant · optometry</text>
+
+  <!-- ── STAGE BOXES ── -->
+
+  <!-- Input: Supplier CSV -->
+  <rect x="20" y="80" width="130" height="64" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="85" y="105" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="600">SUPPLIER CSV</text>
+  <text x="85" y="122" text-anchor="middle" fill="#7d8590" font-size="10">Benco · Vetcove</text>
+  <text x="85" y="136" text-anchor="middle" fill="#7d8590" font-size="10">Ferguson · Sysco · VSP</text>
+
+  <!-- Arrow 1 -->
+  <line x1="152" y1="112" x2="190" y2="112" stroke="#30363d" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="171" y="108" text-anchor="middle" fill="#7d8590" font-size="9">adapter</text>
+
+  <!-- Canonical Schema -->
+  <rect x="192" y="80" width="120" height="64" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="252" y="103" text-anchor="middle" fill="#79c0ff" font-size="11" font-weight="600">CANONICAL</text>
+  <text x="252" y="117" text-anchor="middle" fill="#79c0ff" font-size="10">SCHEMA</text>
+  <text x="252" y="133" text-anchor="middle" fill="#7d8590" font-size="9">sku · desc · qty · price</text>
+
+  <!-- Arrow 2 -->
+  <line x1="314" y1="112" x2="352" y2="112" stroke="#30363d" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Stage 1 -->
+  <rect x="354" y="68" width="130" height="88" rx="8" fill="#0d2339" stroke="#1f6feb" stroke-width="1.5"/>
+  <text x="419" y="91" text-anchor="middle" fill="#58a6ff" font-size="10" font-weight="700">STAGE 1</text>
+  <text x="419" y="105" text-anchor="middle" fill="#e6edf3" font-size="11" font-weight="600">Deterministic</text>
+  <text x="419" y="119" text-anchor="middle" fill="#7d8590" font-size="9">exact SKU match</text>
+  <text x="419" y="133" text-anchor="middle" fill="#3fb950" font-size="9">~30–40% at zero LLM cost</text>
+  <text x="419" y="147" text-anchor="middle" fill="#7d8590" font-size="9">&#x26A1; instant · no API calls</text>
+
+  <!-- Arrow Stage1 → hit -->
+  <line x1="486" y1="95" x2="730" y2="95" stroke="#3fb950" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr-green)"/>
+  <text x="610" y="90" text-anchor="middle" fill="#3fb950" font-size="9">hit →</text>
+
+  <!-- Arrow Stage1 → miss → Stage2 -->
+  <line x1="486" y1="128" x2="524" y2="128" stroke="#30363d" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="505" y="123" text-anchor="middle" fill="#7d8590" font-size="9">miss</text>
+
+  <!-- Stage 2 -->
+  <rect x="526" y="68" width="130" height="88" rx="8" fill="#1a1a2e" stroke="#6e40c9" stroke-width="1.5"/>
+  <text x="591" y="91" text-anchor="middle" fill="#a371f7" font-size="10" font-weight="700">STAGE 2</text>
+  <text x="591" y="105" text-anchor="middle" fill="#e6edf3" font-size="11" font-weight="600">Semantic</text>
+  <text x="591" y="119" text-anchor="middle" fill="#7d8590" font-size="9">fuzzy + token overlap</text>
+  <text x="591" y="133" text-anchor="middle" fill="#7d8590" font-size="9">top-K candidates</text>
+  <text x="591" y="147" text-anchor="middle" fill="#7d8590" font-size="9">embeddings optional</text>
+
+  <!-- Arrow Stage2 → Stage3 -->
+  <line x1="658" y1="112" x2="696" y2="112" stroke="#30363d" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Stage 3 -->
+  <rect x="698" y="68" width="130" height="88" rx="8" fill="#1a0a00" stroke="#f78166" stroke-width="1.5"/>
+  <text x="763" y="91" text-anchor="middle" fill="#ffa657" font-size="10" font-weight="700">STAGE 3</text>
+  <text x="763" y="105" text-anchor="middle" fill="#e6edf3" font-size="11" font-weight="600">LLM Judge</text>
+  <text x="763" y="119" text-anchor="middle" fill="#7d8590" font-size="9">Claude Haiku / GPT</text>
+  <text x="763" y="133" text-anchor="middle" fill="#7d8590" font-size="9">mock fallback offline</text>
+  <text x="763" y="147" text-anchor="middle" fill="#7d8590" font-size="9">reasoning + disambiguation</text>
+
+  <!-- ── UOM NORMALIZER BAND ── -->
+  <rect x="354" y="170" width="474" height="32" rx="6" fill="#0d2218" stroke="#196c2e" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="591" y="190" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="600">UOM / Pack-Size Normalizer — runs cross-cut on every line · forces human review on mismatch</text>
+
+  <!-- ── CONFIDENCE ROUTER ── -->
+  <rect x="354" y="218" width="474" height="28" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="591" y="236" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Confidence Router</text>
+
+  <!-- Router outputs -->
+  <!-- Auto Accept -->
+  <rect x="354" y="262" width="140" height="52" rx="6" fill="#0d2218" stroke="#3fb950" stroke-width="1.5"/>
+  <text x="424" y="284" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="700">AUTO-ACCEPT</text>
+  <text x="424" y="298" text-anchor="middle" fill="#7d8590" font-size="9">≥0.85 · no UOM mismatch</text>
+  <text x="424" y="311" text-anchor="middle" fill="#3fb950" font-size="9">→ savings report &#x2713;</text>
+
+  <!-- Review Queue -->
+  <rect x="521" y="262" width="140" height="52" rx="6" fill="#1c1a00" stroke="#e3b341" stroke-width="1.5"/>
+  <text x="591" y="284" text-anchor="middle" fill="#e3b341" font-size="10" font-weight="700">REVIEW QUEUE</text>
+  <text x="591" y="298" text-anchor="middle" fill="#7d8590" font-size="9">0.60–0.85 · or UOM mismatch</text>
+  <text x="591" y="311" text-anchor="middle" fill="#e3b341" font-size="9">→ human approval</text>
+
+  <!-- No Match -->
+  <rect x="688" y="262" width="140" height="52" rx="6" fill="#200d0d" stroke="#f85149" stroke-width="1.5"/>
+  <text x="758" y="284" text-anchor="middle" fill="#f85149" font-size="10" font-weight="700">NO-MATCH</text>
+  <text x="758" y="298" text-anchor="middle" fill="#7d8590" font-size="9">&lt;0.60 confidence</text>
+  <text x="758" y="311" text-anchor="middle" fill="#f85149" font-size="9">→ catalog gap analysis</text>
+
+  <!-- Connecting lines router → buckets -->
+  <line x1="480" y1="246" x2="424" y2="262" stroke="#3fb950" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="591" y1="246" x2="591" y2="262" stroke="#e3b341" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="700" y1="246" x2="758" y2="262" stroke="#f85149" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Stats footer -->
+  <text x="450" y="327" text-anchor="middle" fill="#7d8590" font-size="10">
+    Dental 94% auto · Vet 100% · HVAC 97% · Restaurant 100% · Optometry 97% — run scripts/benchmark.py to reproduce
+  </text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#30363d"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3fb950"/>
+    </marker>
+  </defs>
+</svg>
