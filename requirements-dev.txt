@@ -1,0 +1,6 @@
+# Dev/check tooling. Installed by `make install`.
+# ruff is pinned to match .pre-commit-config.yaml (ruff-pre-commit rev v0.6.9);
+# keep the two in sync when bumping.
+pytest>=7.4
+pytest-cov>=4.1
+ruff==0.6.9

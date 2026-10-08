@@ -1,6 +1,5 @@
 # Vertical Procurement Toolkit
 
-[![CI](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/abhinaykrupa/vertical-procurement-toolkit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Live Demo](https://img.shields.io/badge/demo-streamlit-ff4b4b)](https://vertical-procurement-toolkit.streamlit.app/)
@@ -72,7 +71,7 @@ sample_data/
   optometry_catalog.csv         Optometry reference catalog (~30 SKUs)
   *_<supplier>.csv              Sample supplier exports (5 verticals, 11 files)
 tests/                          Pytest suite — 60 tests
-.github/workflows/ci.yml        GitHub Actions CI (3.10 / 3.11 / 3.12)
+Makefile, .githooks/pre-push    Local checks: lint + tests + CLI smoke (no hosted CI)
 ADAPTING.md                     ← Read this to adapt to your vertical
 CONTRIBUTING.md                 How to contribute (new adapters, verticals, fixes)
 CHANGELOG.md                    Versioned changes
@@ -116,6 +115,15 @@ python3 -m venv .venv
 .venv/bin/streamlit run app/main.py
 ```
 Opens at `http://localhost:8501`. Pick any sample file from the dropdown to see the pipeline run end-to-end.
+---
+## Checks (run locally)
+There is no hosted CI; checks run on your machine (ruff, pytest, CLI smoke test). Requires Python 3.10+.
+```bash
+make install   # create .venv, install requirements.txt + requirements-dev.txt (ruff pinned to 0.6.9)
+make check     # lint + test + smoke
+make hooks     # optional: run `make check` automatically before every git push
+```
+Individual targets: `make lint`, `make test`, `make smoke`. Use another interpreter with `make check PYTHON=python3.12`. Bypass the hook once with `git push --no-verify`.
 ---
 ## Honest match rates
 Run `python scripts/benchmark.py` to reproduce. Real numbers on the bundled samples:

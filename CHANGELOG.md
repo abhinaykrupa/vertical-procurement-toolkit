@@ -5,6 +5,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This project f
 
 ## [Unreleased]
 
+### Changed
+- Removed the GitHub Actions workflow. Checks (ruff, pytest, CLI smoke) now run locally via `make check`; `.githooks/pre-push` runs them before every push (`make hooks`). Dev deps are pinned in `requirements-dev.txt` (ruff 0.6.9, matching `.pre-commit-config.yaml`).
+
 ### Added (later in v0.2 cycle)
 - **Optional embedding-based Stage-2 retrieval** (`vpt/retrieval.py`): sentence-transformers (all-MiniLM-L6-v2) behind `STAGE2_RETRIEVAL=embeddings`. Drop-in replacement for the difflib retriever; falls back gracefully when the package is absent so the zero-dep demo never breaks. `[embeddings]` extra in pyproject.
 - **Optometry vertical** (5th vertical): VSP/Essilor adapter, 30-SKU catalog (contacts, lenses, frames, coatings, solutions, drops, diagnostics), sample export, uom_tables/optometry.yaml. End-to-end: 30 lines, $98.8K spend, $12.3K savings, 1 catalog gap.

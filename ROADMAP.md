@@ -13,7 +13,7 @@ Shipped:
 - ✅ Per-vertical UOM tables (YAML) — dental, vet, HVAC, restaurant, auto-loaded per adapter
 - ✅ **Four working vertical examples** — dental, vet (Vetcove), HVAC (Ferguson), restaurant (Sysco)
 - ✅ `vpt validate` command for catalog QA
-- ✅ Pytest suite (50 tests) + GitHub Actions CI (Py 3.10/3.11/3.12) + ruff + pre-commit
+- ✅ Pytest suite (50 tests) + local checks (`make check`: ruff + pytest + CLI smoke) + ruff + pre-commit
 - ✅ Standard OSS hygiene — pyproject.toml, SECURITY.md, PR/issue templates, CHANGELOG, ROADMAP
 
 ## Next (v0.3 — community-driven)

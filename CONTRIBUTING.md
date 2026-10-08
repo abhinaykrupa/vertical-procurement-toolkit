@@ -40,16 +40,26 @@ If you're not sure where to start, look for issues tagged `good first issue` or 
 ## Code style
 
 - Python 3.10+
-- `black` for formatting
+- `ruff` for linting (pinned in `requirements-dev.txt`; run `make lint`)
 - Type hints on new functions where it adds clarity
 - Keep adapters under ~100 lines — if your adapter needs more, the supplier export is probably worth splitting into a parsing helper + an adapter
 - Match the style of existing code; don't refactor unrelated code in the same PR
 
 ---
 
+## Checks (run locally)
+
+There is no hosted CI. Run the checks yourself before opening a PR:
+
+```bash
+make install   # one-time: .venv + pinned dev deps
+make check     # ruff + pytest + CLI smoke test
+make hooks     # optional: run `make check` on every git push
+```
+
 ## Testing
 
-There's no full test suite yet (one of the open contributions). When you add a new adapter:
+The pytest suite lives in `tests/`. When you add a new adapter:
 
 - Include at least one sample export file under `sample_data/`
 - Verify the Streamlit UI loads it without errors
